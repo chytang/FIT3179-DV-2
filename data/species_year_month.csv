@@ -1,0 +1,601 @@
+species,year,month,count
+Rainbow Bee-eater,2019,1,1782
+Rainbow Bee-eater,2019,2,1491
+Rainbow Bee-eater,2019,3,1697
+Rainbow Bee-eater,2019,4,1645
+Rainbow Bee-eater,2019,5,1855
+Rainbow Bee-eater,2019,6,2373
+Rainbow Bee-eater,2019,7,3157
+Rainbow Bee-eater,2019,8,2258
+Rainbow Bee-eater,2019,9,2379
+Rainbow Bee-eater,2019,10,3471
+Rainbow Bee-eater,2019,11,2472
+Rainbow Bee-eater,2019,12,1953
+Rainbow Bee-eater,2020,1,2193
+Rainbow Bee-eater,2020,2,1630
+Rainbow Bee-eater,2020,3,1598
+Rainbow Bee-eater,2020,4,1641
+Rainbow Bee-eater,2020,5,2157
+Rainbow Bee-eater,2020,6,1871
+Rainbow Bee-eater,2020,7,2239
+Rainbow Bee-eater,2020,8,2545
+Rainbow Bee-eater,2020,9,2485
+Rainbow Bee-eater,2020,10,3669
+Rainbow Bee-eater,2020,11,2612
+Rainbow Bee-eater,2020,12,2156
+Rainbow Bee-eater,2021,1,2691
+Rainbow Bee-eater,2021,2,1972
+Rainbow Bee-eater,2021,3,2189
+Rainbow Bee-eater,2021,4,2085
+Rainbow Bee-eater,2021,5,2601
+Rainbow Bee-eater,2021,6,2626
+Rainbow Bee-eater,2021,7,2719
+Rainbow Bee-eater,2021,8,2718
+Rainbow Bee-eater,2021,9,2445
+Rainbow Bee-eater,2021,10,3581
+Rainbow Bee-eater,2021,11,2744
+Rainbow Bee-eater,2021,12,2284
+Rainbow Bee-eater,2022,1,2843
+Rainbow Bee-eater,2022,2,1901
+Rainbow Bee-eater,2022,3,2186
+Rainbow Bee-eater,2022,4,2255
+Rainbow Bee-eater,2022,5,2355
+Rainbow Bee-eater,2022,6,2820
+Rainbow Bee-eater,2022,7,2798
+Rainbow Bee-eater,2022,8,3205
+Rainbow Bee-eater,2022,9,3161
+Rainbow Bee-eater,2022,10,3939
+Rainbow Bee-eater,2022,11,2876
+Rainbow Bee-eater,2022,12,2332
+Rainbow Bee-eater,2023,1,2824
+Rainbow Bee-eater,2023,2,2402
+Rainbow Bee-eater,2023,3,2685
+Rainbow Bee-eater,2023,4,2674
+Rainbow Bee-eater,2023,5,2699
+Rainbow Bee-eater,2023,6,2825
+Rainbow Bee-eater,2023,7,3819
+Rainbow Bee-eater,2023,8,4307
+Rainbow Bee-eater,2023,9,4284
+Rainbow Bee-eater,2023,10,5032
+Rainbow Bee-eater,2023,11,3764
+Rainbow Bee-eater,2023,12,2688
+Rainbow Bee-eater,2024,1,2843
+Rainbow Bee-eater,2024,2,2230
+Rainbow Bee-eater,2024,3,2663
+Rainbow Bee-eater,2024,4,2365
+Rainbow Bee-eater,2024,5,2617
+Rainbow Bee-eater,2024,6,3584
+Rainbow Bee-eater,2024,7,3759
+Rainbow Bee-eater,2024,8,3957
+Rainbow Bee-eater,2024,9,3984
+Rainbow Bee-eater,2024,10,6201
+Rainbow Bee-eater,2024,11,3791
+Rainbow Bee-eater,2024,12,2511
+Rainbow Bee-eater,2025,1,3136
+Rainbow Bee-eater,2025,2,2499
+Rainbow Bee-eater,2025,3,2569
+Rainbow Bee-eater,2025,4,2693
+Rainbow Bee-eater,2025,5,2941
+Rainbow Bee-eater,2025,6,3907
+Rainbow Bee-eater,2025,7,4855
+Rainbow Bee-eater,2025,8,4763
+Rainbow Bee-eater,2025,9,722
+Rainbow Bee-eater,2025,10,848
+Rainbow Bee-eater,2025,11,595
+Rainbow Bee-eater,2025,12,373
+Eastern Koel,2019,1,2545
+Eastern Koel,2019,2,881
+Eastern Koel,2019,3,284
+Eastern Koel,2019,4,46
+Eastern Koel,2019,5,12
+Eastern Koel,2019,6,7
+Eastern Koel,2019,7,3
+Eastern Koel,2019,8,7
+Eastern Koel,2019,9,197
+Eastern Koel,2019,10,1809
+Eastern Koel,2019,11,2816
+Eastern Koel,2019,12,2847
+Eastern Koel,2020,1,2815
+Eastern Koel,2020,2,1197
+Eastern Koel,2020,3,503
+Eastern Koel,2020,4,117
+Eastern Koel,2020,5,46
+Eastern Koel,2020,6,6
+Eastern Koel,2020,7,7
+Eastern Koel,2020,8,24
+Eastern Koel,2020,9,601
+Eastern Koel,2020,10,3778
+Eastern Koel,2020,11,3951
+Eastern Koel,2020,12,3573
+Eastern Koel,2021,1,3407
+Eastern Koel,2021,2,1447
+Eastern Koel,2021,3,611
+Eastern Koel,2021,4,53
+Eastern Koel,2021,5,12
+Eastern Koel,2021,6,5
+Eastern Koel,2021,7,12
+Eastern Koel,2021,8,32
+Eastern Koel,2021,9,724
+Eastern Koel,2021,10,4334
+Eastern Koel,2021,11,3535
+Eastern Koel,2021,12,3838
+Eastern Koel,2022,1,3535
+Eastern Koel,2022,2,1244
+Eastern Koel,2022,3,495
+Eastern Koel,2022,4,60
+Eastern Koel,2022,5,20
+Eastern Koel,2022,6,6
+Eastern Koel,2022,7,6
+Eastern Koel,2022,8,28
+Eastern Koel,2022,9,1143
+Eastern Koel,2022,10,4128
+Eastern Koel,2022,11,4575
+Eastern Koel,2022,12,4303
+Eastern Koel,2023,1,3705
+Eastern Koel,2023,2,1343
+Eastern Koel,2023,3,466
+Eastern Koel,2023,4,100
+Eastern Koel,2023,5,20
+Eastern Koel,2023,6,3
+Eastern Koel,2023,7,7
+Eastern Koel,2023,8,29
+Eastern Koel,2023,9,562
+Eastern Koel,2023,10,3176
+Eastern Koel,2023,11,5323
+Eastern Koel,2023,12,5165
+Eastern Koel,2024,1,4533
+Eastern Koel,2024,2,1816
+Eastern Koel,2024,3,584
+Eastern Koel,2024,4,62
+Eastern Koel,2024,5,16
+Eastern Koel,2024,6,2
+Eastern Koel,2024,7,5
+Eastern Koel,2024,8,69
+Eastern Koel,2024,9,1157
+Eastern Koel,2024,10,6078
+Eastern Koel,2024,11,6114
+Eastern Koel,2024,12,5086
+Eastern Koel,2025,1,3874
+Eastern Koel,2025,2,1515
+Eastern Koel,2025,3,450
+Eastern Koel,2025,4,85
+Eastern Koel,2025,5,17
+Eastern Koel,2025,6,1
+Eastern Koel,2025,7,9
+Eastern Koel,2025,8,45
+Eastern Koel,2025,9,140
+Eastern Koel,2025,10,719
+Eastern Koel,2025,11,738
+Eastern Koel,2025,12,529
+Swift Parrot,2019,1,22
+Swift Parrot,2019,2,28
+Swift Parrot,2019,3,35
+Swift Parrot,2019,4,316
+Swift Parrot,2019,5,342
+Swift Parrot,2019,6,215
+Swift Parrot,2019,7,176
+Swift Parrot,2019,8,141
+Swift Parrot,2019,9,148
+Swift Parrot,2019,10,148
+Swift Parrot,2019,11,137
+Swift Parrot,2019,12,108
+Swift Parrot,2020,1,73
+Swift Parrot,2020,2,39
+Swift Parrot,2020,3,25
+Swift Parrot,2020,4,108
+Swift Parrot,2020,5,156
+Swift Parrot,2020,6,84
+Swift Parrot,2020,7,79
+Swift Parrot,2020,8,152
+Swift Parrot,2020,9,149
+Swift Parrot,2020,10,102
+Swift Parrot,2020,11,58
+Swift Parrot,2020,12,51
+Swift Parrot,2021,1,31
+Swift Parrot,2021,2,23
+Swift Parrot,2021,3,47
+Swift Parrot,2021,4,431
+Swift Parrot,2021,5,496
+Swift Parrot,2021,6,315
+Swift Parrot,2021,7,164
+Swift Parrot,2021,8,183
+Swift Parrot,2021,9,174
+Swift Parrot,2021,10,120
+Swift Parrot,2021,11,76
+Swift Parrot,2021,12,35
+Swift Parrot,2022,1,19
+Swift Parrot,2022,2,7
+Swift Parrot,2022,3,81
+Swift Parrot,2022,4,182
+Swift Parrot,2022,5,176
+Swift Parrot,2022,6,100
+Swift Parrot,2022,7,107
+Swift Parrot,2022,8,123
+Swift Parrot,2022,9,146
+Swift Parrot,2022,10,141
+Swift Parrot,2022,11,164
+Swift Parrot,2022,12,94
+Swift Parrot,2023,1,44
+Swift Parrot,2023,2,26
+Swift Parrot,2023,3,16
+Swift Parrot,2023,4,60
+Swift Parrot,2023,5,227
+Swift Parrot,2023,6,99
+Swift Parrot,2023,7,44
+Swift Parrot,2023,8,87
+Swift Parrot,2023,9,120
+Swift Parrot,2023,10,272
+Swift Parrot,2023,11,352
+Swift Parrot,2023,12,138
+Swift Parrot,2024,1,85
+Swift Parrot,2024,2,84
+Swift Parrot,2024,3,84
+Swift Parrot,2024,4,249
+Swift Parrot,2024,5,172
+Swift Parrot,2024,6,337
+Swift Parrot,2024,7,165
+Swift Parrot,2024,8,98
+Swift Parrot,2024,9,121
+Swift Parrot,2024,10,288
+Swift Parrot,2024,11,361
+Swift Parrot,2024,12,69
+Swift Parrot,2025,1,78
+Swift Parrot,2025,2,48
+Swift Parrot,2025,3,41
+Swift Parrot,2025,4,142
+Swift Parrot,2025,5,209
+Swift Parrot,2025,6,281
+Swift Parrot,2025,7,182
+Swift Parrot,2025,8,97
+Swift Parrot,2025,9,66
+Swift Parrot,2025,10,54
+Swift Parrot,2025,11,67
+Swift Parrot,2025,12,43
+Eastern Curlew,2019,1,881
+Eastern Curlew,2019,2,615
+Eastern Curlew,2019,3,476
+Eastern Curlew,2019,4,206
+Eastern Curlew,2019,5,137
+Eastern Curlew,2019,6,208
+Eastern Curlew,2019,7,356
+Eastern Curlew,2019,8,413
+Eastern Curlew,2019,9,616
+Eastern Curlew,2019,10,873
+Eastern Curlew,2019,11,716
+Eastern Curlew,2019,12,647
+Eastern Curlew,2020,1,898
+Eastern Curlew,2020,2,645
+Eastern Curlew,2020,3,394
+Eastern Curlew,2020,4,115
+Eastern Curlew,2020,5,137
+Eastern Curlew,2020,6,165
+Eastern Curlew,2020,7,242
+Eastern Curlew,2020,8,395
+Eastern Curlew,2020,9,520
+Eastern Curlew,2020,10,520
+Eastern Curlew,2020,11,520
+Eastern Curlew,2020,12,645
+Eastern Curlew,2021,1,1029
+Eastern Curlew,2021,2,905
+Eastern Curlew,2021,3,583
+Eastern Curlew,2021,4,273
+Eastern Curlew,2021,5,223
+Eastern Curlew,2021,6,185
+Eastern Curlew,2021,7,271
+Eastern Curlew,2021,8,340
+Eastern Curlew,2021,9,558
+Eastern Curlew,2021,10,716
+Eastern Curlew,2021,11,761
+Eastern Curlew,2021,12,853
+Eastern Curlew,2022,1,1187
+Eastern Curlew,2022,2,735
+Eastern Curlew,2022,3,414
+Eastern Curlew,2022,4,182
+Eastern Curlew,2022,5,118
+Eastern Curlew,2022,6,72
+Eastern Curlew,2022,7,208
+Eastern Curlew,2022,8,486
+Eastern Curlew,2022,9,754
+Eastern Curlew,2022,10,1113
+Eastern Curlew,2022,11,951
+Eastern Curlew,2022,12,911
+Eastern Curlew,2023,1,1109
+Eastern Curlew,2023,2,842
+Eastern Curlew,2023,3,763
+Eastern Curlew,2023,4,311
+Eastern Curlew,2023,5,213
+Eastern Curlew,2023,6,207
+Eastern Curlew,2023,7,393
+Eastern Curlew,2023,8,791
+Eastern Curlew,2023,9,1037
+Eastern Curlew,2023,10,1440
+Eastern Curlew,2023,11,1077
+Eastern Curlew,2023,12,919
+Eastern Curlew,2024,1,1134
+Eastern Curlew,2024,2,1099
+Eastern Curlew,2024,3,760
+Eastern Curlew,2024,4,378
+Eastern Curlew,2024,5,278
+Eastern Curlew,2024,6,310
+Eastern Curlew,2024,7,414
+Eastern Curlew,2024,8,814
+Eastern Curlew,2024,9,1156
+Eastern Curlew,2024,10,1481
+Eastern Curlew,2024,11,1122
+Eastern Curlew,2024,12,1131
+Eastern Curlew,2025,1,1483
+Eastern Curlew,2025,2,1091
+Eastern Curlew,2025,3,966
+Eastern Curlew,2025,4,280
+Eastern Curlew,2025,5,187
+Eastern Curlew,2025,6,165
+Eastern Curlew,2025,7,349
+Eastern Curlew,2025,8,944
+Eastern Curlew,2025,9,133
+Eastern Curlew,2025,10,167
+Eastern Curlew,2025,11,128
+Eastern Curlew,2025,12,117
+Dollarbird,2019,1,1875
+Dollarbird,2019,2,1116
+Dollarbird,2019,3,635
+Dollarbird,2019,4,144
+Dollarbird,2019,5,34
+Dollarbird,2019,6,6
+Dollarbird,2019,7,12
+Dollarbird,2019,8,4
+Dollarbird,2019,9,158
+Dollarbird,2019,10,1439
+Dollarbird,2019,11,1825
+Dollarbird,2019,12,1510
+Dollarbird,2020,1,2357
+Dollarbird,2020,2,1143
+Dollarbird,2020,3,565
+Dollarbird,2020,4,96
+Dollarbird,2020,5,10
+Dollarbird,2020,6,5
+Dollarbird,2020,7,3
+Dollarbird,2020,8,14
+Dollarbird,2020,9,176
+Dollarbird,2020,10,1706
+Dollarbird,2020,11,1988
+Dollarbird,2020,12,1613
+Dollarbird,2021,1,2488
+Dollarbird,2021,2,1180
+Dollarbird,2021,3,627
+Dollarbird,2021,4,194
+Dollarbird,2021,5,24
+Dollarbird,2021,6,16
+Dollarbird,2021,7,7
+Dollarbird,2021,8,28
+Dollarbird,2021,9,210
+Dollarbird,2021,10,2381
+Dollarbird,2021,11,1820
+Dollarbird,2021,12,2124
+Dollarbird,2022,1,2610
+Dollarbird,2022,2,1257
+Dollarbird,2022,3,675
+Dollarbird,2022,4,236
+Dollarbird,2022,5,37
+Dollarbird,2022,6,11
+Dollarbird,2022,7,10
+Dollarbird,2022,8,27
+Dollarbird,2022,9,588
+Dollarbird,2022,10,2313
+Dollarbird,2022,11,2419
+Dollarbird,2022,12,2249
+Dollarbird,2023,1,3050
+Dollarbird,2023,2,1536
+Dollarbird,2023,3,963
+Dollarbird,2023,4,349
+Dollarbird,2023,5,48
+Dollarbird,2023,6,9
+Dollarbird,2023,7,9
+Dollarbird,2023,8,18
+Dollarbird,2023,9,286
+Dollarbird,2023,10,2003
+Dollarbird,2023,11,3113
+Dollarbird,2023,12,2369
+Dollarbird,2024,1,3038
+Dollarbird,2024,2,1667
+Dollarbird,2024,3,925
+Dollarbird,2024,4,391
+Dollarbird,2024,5,39
+Dollarbird,2024,6,5
+Dollarbird,2024,7,4
+Dollarbird,2024,8,17
+Dollarbird,2024,9,354
+Dollarbird,2024,10,2829
+Dollarbird,2024,11,2598
+Dollarbird,2024,12,2508
+Dollarbird,2025,1,3185
+Dollarbird,2025,2,1820
+Dollarbird,2025,3,927
+Dollarbird,2025,4,324
+Dollarbird,2025,5,40
+Dollarbird,2025,6,15
+Dollarbird,2025,7,12
+Dollarbird,2025,8,17
+Dollarbird,2025,9,49
+Dollarbird,2025,10,422
+Dollarbird,2025,11,372
+Dollarbird,2025,12,318
+Channel-billed Cuckoo,2019,1,1429
+Channel-billed Cuckoo,2019,2,473
+Channel-billed Cuckoo,2019,3,210
+Channel-billed Cuckoo,2019,4,77
+Channel-billed Cuckoo,2019,5,41
+Channel-billed Cuckoo,2019,6,25
+Channel-billed Cuckoo,2019,7,59
+Channel-billed Cuckoo,2019,8,42
+Channel-billed Cuckoo,2019,9,374
+Channel-billed Cuckoo,2019,10,1396
+Channel-billed Cuckoo,2019,11,1538
+Channel-billed Cuckoo,2019,12,1535
+Channel-billed Cuckoo,2020,1,1640
+Channel-billed Cuckoo,2020,2,550
+Channel-billed Cuckoo,2020,3,217
+Channel-billed Cuckoo,2020,4,35
+Channel-billed Cuckoo,2020,5,20
+Channel-billed Cuckoo,2020,6,15
+Channel-billed Cuckoo,2020,7,17
+Channel-billed Cuckoo,2020,8,38
+Channel-billed Cuckoo,2020,9,781
+Channel-billed Cuckoo,2020,10,2209
+Channel-billed Cuckoo,2020,11,1941
+Channel-billed Cuckoo,2020,12,1975
+Channel-billed Cuckoo,2021,1,2110
+Channel-billed Cuckoo,2021,2,880
+Channel-billed Cuckoo,2021,3,360
+Channel-billed Cuckoo,2021,4,103
+Channel-billed Cuckoo,2021,5,50
+Channel-billed Cuckoo,2021,6,42
+Channel-billed Cuckoo,2021,7,37
+Channel-billed Cuckoo,2021,8,61
+Channel-billed Cuckoo,2021,9,856
+Channel-billed Cuckoo,2021,10,2743
+Channel-billed Cuckoo,2021,11,1672
+Channel-billed Cuckoo,2021,12,1849
+Channel-billed Cuckoo,2022,1,1711
+Channel-billed Cuckoo,2022,2,623
+Channel-billed Cuckoo,2022,3,301
+Channel-billed Cuckoo,2022,4,107
+Channel-billed Cuckoo,2022,5,38
+Channel-billed Cuckoo,2022,6,47
+Channel-billed Cuckoo,2022,7,43
+Channel-billed Cuckoo,2022,8,73
+Channel-billed Cuckoo,2022,9,1117
+Channel-billed Cuckoo,2022,10,2242
+Channel-billed Cuckoo,2022,11,2123
+Channel-billed Cuckoo,2022,12,2475
+Channel-billed Cuckoo,2023,1,2179
+Channel-billed Cuckoo,2023,2,873
+Channel-billed Cuckoo,2023,3,358
+Channel-billed Cuckoo,2023,4,91
+Channel-billed Cuckoo,2023,5,31
+Channel-billed Cuckoo,2023,6,38
+Channel-billed Cuckoo,2023,7,76
+Channel-billed Cuckoo,2023,8,66
+Channel-billed Cuckoo,2023,9,1053
+Channel-billed Cuckoo,2023,10,2651
+Channel-billed Cuckoo,2023,11,2585
+Channel-billed Cuckoo,2023,12,2654
+Channel-billed Cuckoo,2024,1,2095
+Channel-billed Cuckoo,2024,2,814
+Channel-billed Cuckoo,2024,3,350
+Channel-billed Cuckoo,2024,4,99
+Channel-billed Cuckoo,2024,5,48
+Channel-billed Cuckoo,2024,6,79
+Channel-billed Cuckoo,2024,7,104
+Channel-billed Cuckoo,2024,8,96
+Channel-billed Cuckoo,2024,9,1686
+Channel-billed Cuckoo,2024,10,3917
+Channel-billed Cuckoo,2024,11,2961
+Channel-billed Cuckoo,2024,12,2863
+Channel-billed Cuckoo,2025,1,2645
+Channel-billed Cuckoo,2025,2,1189
+Channel-billed Cuckoo,2025,3,459
+Channel-billed Cuckoo,2025,4,165
+Channel-billed Cuckoo,2025,5,72
+Channel-billed Cuckoo,2025,6,68
+Channel-billed Cuckoo,2025,7,109
+Channel-billed Cuckoo,2025,8,102
+Channel-billed Cuckoo,2025,9,153
+Channel-billed Cuckoo,2025,10,456
+Channel-billed Cuckoo,2025,11,356
+Channel-billed Cuckoo,2025,12,315
+Budgerigar,2019,1,48
+Budgerigar,2019,2,73
+Budgerigar,2019,3,105
+Budgerigar,2019,4,195
+Budgerigar,2019,5,330
+Budgerigar,2019,6,409
+Budgerigar,2019,7,620
+Budgerigar,2019,8,572
+Budgerigar,2019,9,309
+Budgerigar,2019,10,270
+Budgerigar,2019,11,157
+Budgerigar,2019,12,108
+Budgerigar,2020,1,41
+Budgerigar,2020,2,87
+Budgerigar,2020,3,236
+Budgerigar,2020,4,117
+Budgerigar,2020,5,88
+Budgerigar,2020,6,322
+Budgerigar,2020,7,602
+Budgerigar,2020,8,607
+Budgerigar,2020,9,1187
+Budgerigar,2020,10,1052
+Budgerigar,2020,11,415
+Budgerigar,2020,12,284
+Budgerigar,2021,1,379
+Budgerigar,2021,2,256
+Budgerigar,2021,3,236
+Budgerigar,2021,4,480
+Budgerigar,2021,5,868
+Budgerigar,2021,6,1088
+Budgerigar,2021,7,815
+Budgerigar,2021,8,687
+Budgerigar,2021,9,740
+Budgerigar,2021,10,461
+Budgerigar,2021,11,428
+Budgerigar,2021,12,253
+Budgerigar,2022,1,205
+Budgerigar,2022,2,181
+Budgerigar,2022,3,119
+Budgerigar,2022,4,923
+Budgerigar,2022,5,631
+Budgerigar,2022,6,473
+Budgerigar,2022,7,897
+Budgerigar,2022,8,1167
+Budgerigar,2022,9,1115
+Budgerigar,2022,10,905
+Budgerigar,2022,11,436
+Budgerigar,2022,12,453
+Budgerigar,2023,1,395
+Budgerigar,2023,2,269
+Budgerigar,2023,3,330
+Budgerigar,2023,4,329
+Budgerigar,2023,5,466
+Budgerigar,2023,6,576
+Budgerigar,2023,7,564
+Budgerigar,2023,8,791
+Budgerigar,2023,9,663
+Budgerigar,2023,10,536
+Budgerigar,2023,11,193
+Budgerigar,2023,12,173
+Budgerigar,2024,1,137
+Budgerigar,2024,2,110
+Budgerigar,2024,3,298
+Budgerigar,2024,4,413
+Budgerigar,2024,5,587
+Budgerigar,2024,6,789
+Budgerigar,2024,7,790
+Budgerigar,2024,8,1329
+Budgerigar,2024,9,1003
+Budgerigar,2024,10,839
+Budgerigar,2024,11,276
+Budgerigar,2024,12,169
+Budgerigar,2025,1,156
+Budgerigar,2025,2,157
+Budgerigar,2025,3,204
+Budgerigar,2025,4,219
+Budgerigar,2025,5,904
+Budgerigar,2025,6,1349
+Budgerigar,2025,7,1480
+Budgerigar,2025,8,818
+Budgerigar,2025,9,138
+Budgerigar,2025,10,67
+Budgerigar,2025,11,27
+Budgerigar,2025,12,11
+Australian Magpie,2025,1,27682
+Australian Magpie,2025,2,21783
+Australian Magpie,2025,3,23405
+Australian Magpie,2025,4,24641
+Australian Magpie,2025,5,21611
+Australian Magpie,2025,6,22161
+Australian Magpie,2025,7,22637
+Australian Magpie,2025,8,23092
+Australian Magpie,2025,9,4295
+Australian Magpie,2025,10,4980
+Australian Magpie,2025,11,3748
+Australian Magpie,2025,12,3316
