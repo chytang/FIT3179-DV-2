@@ -221,13 +221,13 @@
         .catch(console.error);
 
       // ridgeline
-      vegaEmbed("#ridgeline", charts.ridgeline + "?v=2", options)
+      vegaEmbed("#ridgeline", charts.ridgeline, options)
         .catch(console.error);
       
       vegaEmbed("#heatmap", charts.heatmap, options)
         .catch(console.error);
 
-      vegaEmbed("#path", charts.path + "?v=3", options)
+      vegaEmbed("#path", charts.path, options)
         .catch(console.error);
 
       });
