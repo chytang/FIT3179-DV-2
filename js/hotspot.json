@@ -34,7 +34,7 @@
         "mark": {
             "type": "geoshape",
             "fill": "floralwhite",
-            "stroke": "darkgray",
+            "stroke": "darkgrey",
             "strokeWidth": 0.5
         }
         },
@@ -131,7 +131,7 @@
             "fontSize": 18,
             "fontWeight": 700,
             "anchor": "middle",
-            "color": "#253D32"
+            "color": "black"
         },
         "legend": {
             "titleFont": "Open Sans",

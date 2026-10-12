@@ -63,7 +63,7 @@
             ],
             "mark": {
                 "type": "geoshape",
-                "stroke": "darkgray",
+                "stroke": "darkgrey",
                 "strokeWidth": 1
             },
             "encoding": {
@@ -110,7 +110,7 @@
             ],
             "mark": {
                 "type": "geoshape",
-                "stroke": "darkgray",
+                "stroke": "darkgrey",
                 "strokeWidth": 1
             },
             "encoding": {
@@ -171,7 +171,7 @@
         "fontSize": 18,
         "fontWeight": 700,
         "anchor": "middle",
-        "color": "#253D32"
+        "color": "black"
     },
     "legend": {
         "titleFont": "Open Sans",
