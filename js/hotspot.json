@@ -1,0 +1,143 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": {"expr": "'Where is the ' + selectedBird + ' reported most?'"}
+        },
+    "params": [
+        {
+            "name": "selectedBird",
+            "value": "Rainbow Bee-eater",
+            "bind": {
+                "input": "select",
+                "options": ["Rainbow Bee-eater", "Eastern Koel", "Swift Parrot", "Eastern Curlew",
+                            "Dollarbird", "Channel-billed Cuckoo", "Budgerigar", "Australian Magpie"],
+                "name": "Select a bird: "
+            }
+        }
+    ],
+    "width": "container",
+    "height": 460,
+    "padding": {"left": 0, "right": 10, "top": 5, "bottom": 5},
+    "autosize": {"type": "fit", "contains": "padding"},
+    "projection": {
+        "type": "conicEqualArea", 
+        "parallels": [-18, -36], 
+        "rotate": [-134, 0], 
+        "center": [-1, -28], 
+        "scale": { "expr": "min(width / 0.6, height / 0.6) * 0.96" }, 
+        "translate": { "expr": "[width / 2, height / 2]" } },
+    "layer": [
+        {"data": {
+            "url": "../data/aus_states.topojson",
+            "format": {"type": "topojson", "feature": "states"}
+        },
+        "mark": {
+            "type": "geoshape",
+            "fill": "floralwhite",
+            "stroke": "darkgray",
+            "strokeWidth": 0.5
+        }
+        },
+        {"data": {"url": "../data/grid_monthly.csv"},
+        "transform": 
+            [
+                {"filter": "datum.species == selectedBird"},
+                {"aggregate": 
+                    [{"op": "sum", "field": "count", "as": "count"}],
+                    "groupby": ["lat", "lon"]
+                },
+                {"window": [{"op": "rank", "as": "rank"}],
+                "sort": [{"field": "count", "order": "descending"}]
+                },
+                {"calculate": "abs(datum.lat) + '°S, ' + datum.lon + '°E'", "as": "place"}
+            ],
+        "layer": 
+            [
+                {
+                    "mark": {
+                        "type": "circle",
+                        "color": "hotpink",
+                        "opacity": 0.7,
+                        "stroke": "deeppink",
+                        "strokeWidth": 0.5
+                        },
+                    "encoding": {
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "size": {"field": "count", "type": "quantitative", "scale": {"range": [6, 800]},
+                        "legend": {
+                            "title": "Number of Sightings",
+                            "labelExpr": "format(datum.value, ',')",
+                            "orient": "right",
+                            "offset": -10
+                            }
+                        },
+                        "order": {"field": "count", "type": "quantitative", "sort": "descending"},
+                        "tooltip": [
+                            {
+                                "field": "place",
+                                "type": "nominal",
+                                "title": "Grid square (centre)"
+                            },
+                            {
+                                "field": "count",
+                                "type": "quantitative",
+                                "title": "Sightings",
+                                "format": ","
+                            },
+                            {
+                                "field": "rank",
+                                "type": "quantitative",
+                                "title": "Busiest square rank"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "transform": [{"filter": "datum.rank <= 3"}],
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 12,
+                        "fontWeight": "bold",
+                        "color": "#412402"
+                    },
+                    "encoding": {
+                        "latitude": {
+                            "field": "lat",
+                            "type": "quantitative"
+                        },
+                        "longitude": {
+                            "field": "lon",
+                            "type": "quantitative"
+                        },
+                        "text": {
+                            "field": "rank",
+                            "type": "quantitative"
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "config": {
+        "background": "#FFFFE0",
+        "font": "Open Sans",
+        "view": {
+            "stroke": null,
+            "fill": "#FFFFE0"
+        },
+        "title": {
+            "font": "Open Sans",
+            "fontSize": 18,
+            "fontWeight": 700,
+            "anchor": "middle",
+            "color": "#253D32"
+        },
+        "legend": {
+            "titleFont": "Open Sans",
+            "labelFont": "Open Sans",
+            "titleFontSize": 12,
+            "labelFontSize": 11
+        }
+    }
+}

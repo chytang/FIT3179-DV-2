@@ -1,0 +1,183 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Bird Sightings by State (2019-2025)",
+    "params": [
+        {
+            "name": "chosen",
+            "value": "Total Sightings",
+            "bind": {
+                "input": "select",
+                "options": ["Total Sightings","Sightings Per Person"],
+                "name": "Display: "
+            }
+        }
+    ],
+    "width": 640,
+    "height": 460,
+    "padding": {"left": 0, "right": 10, "top": 5, "bottom": 5},
+    "projection": {
+        "type": "conicEqualArea",
+        "parallels": [-18, -36],
+        "rotate": [-134, 0],
+        "center": [-1, -28], 
+        "scale": { "expr": "min(width / 0.6, height / 0.6) * 0.96" }, 
+        "translate": { "expr": "[width / 2, height / 2]" }
+    },
+    "data": {
+        "url": "../data/aus_states.topojson",
+        "format": {
+            "type": "topojson",
+            "feature": "states"
+        }
+    },
+    "transform": [
+        {
+            "lookup": "properties.STE_NAME21",
+            "from": {
+                "data": {"url": "../data/state_totals.csv"},
+                "key": "state",
+                "fields": ["sightings"]
+            }
+        },
+        {
+            "lookup": "properties.STE_NAME21",
+            "from": {
+                "data": {"url": "../data/state_population.csv"},
+                "key": "state",
+                "fields": ["population"]
+            }
+        },
+        {
+            "calculate": "datum.sightings / datum.population", 
+            "as": "perPerson"
+        },
+        {
+            "calculate": "chosen === 'Total Sightings' ? datum.sightings : datum.perPerson",
+            "as": "selectedMetric"
+        }
+    ],
+    "layer": [
+        {
+            "transform": [
+                {"filter": "chosen === 'Total Sightings'"}
+            ],
+            "mark": {
+                "type": "geoshape",
+                "stroke": "darkgray",
+                "strokeWidth": 1
+            },
+            "encoding": {
+                "color": {
+                    "field": "sightings",
+                    "type": "quantitative",
+                    "scale": {
+                        "scheme": "oranges",
+                        "domain": [0, 15000000]
+                    },
+                    "legend": {
+                        "title": "Total Sightings",
+                        "titleFontSize": 10,
+                        "orient": "right",
+                        "offset": -12
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "properties.STE_NAME21",
+                        "type": "nominal",
+                        "title": "State"
+                    },
+                    {
+                        "field": "sightings",
+                        "type": "quantitative",
+                        "title": "Total sightings",
+                        "format": ","
+                    },
+                    {
+                        "field": "population",
+                        "type": "quantitative",
+                        "title": "State population",
+                        "format": ","
+                    }
+                ]
+            }
+        },
+        {
+            "transform": [
+                {
+                    "filter": "chosen === 'Sightings Per Person'"
+                }
+            ],
+            "mark": {
+                "type": "geoshape",
+                "stroke": "darkgray",
+                "strokeWidth": 1
+            },
+            "encoding": {
+                "color": {
+                    "field": "perPerson",
+                    "type": "quantitative",
+                    "scale": {
+                        "type": "threshold",
+                        "domain": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                        "range": ["#f7fcf5", "#e5f5e0", "#c7e9c0", "#a1d99b",
+                                  "#74c476", "#41ab5d", "#005a32"
+                        ]
+                    },
+                    "legend": {
+                        "title": "Sightings Per Person",
+                        "titleFontSize": 10,
+                        "orient": "right",
+                        "offset": -10
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "properties.STE_NAME21",
+                        "type": "nominal",
+                        "title": "State"
+                    },
+                    {
+                        "field": "perPerson",
+                        "type": "quantitative",
+                        "title": "Sightings per person",
+                        "format": ".2f"
+                    },
+                    {
+                        "field": "population",
+                        "type": "quantitative",
+                        "title": "State population",
+                        "format": ","
+                    },
+                    {
+                        "field": "sightings",
+                        "type": "quantitative",
+                        "title": "Total sightings",
+                        "format": ","
+                    }
+                ]
+            }
+        }
+    ],
+    "config": {
+    "background": "#FFFFE0",
+    "font": "Open Sans",
+    "view": {
+        "stroke": null,
+        "fill": "#FFFFE0"
+    },
+    "title": {
+        "font": "Open Sans",
+        "fontSize": 18,
+        "fontWeight": 700,
+        "anchor": "middle",
+        "color": "#253D32"
+    },
+    "legend": {
+        "titleFont": "Open Sans",
+        "labelFont": "Open Sans",
+        "titleFontSize": 12,
+        "labelFontSize": 11
+    }
+}
+}
