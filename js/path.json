@@ -1,0 +1,226 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": {
+      "expr": "'The ' + selectedBird + \"'s Journey Through the Year\""
+    },
+    "subtitle": ["Monthly average locations of recorded sightings"],
+    "anchor": "middle",
+    "offset": 12
+  },
+  "params": [
+    {
+      "name": "selectedBird",
+      "value": "Rainbow Bee-eater",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Rainbow Bee-eater",
+          "Eastern Koel",
+          "Swift Parrot",
+          "Eastern Curlew",
+          "Budgerigar",
+          "Australian Magpie"
+        ],
+        "name": "Select a bird: "
+      }
+    },
+    {
+      "name": "selected_month",
+      "value": 1,
+      "bind": {
+        "input": "range",
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "name": "Month: "
+      }
+    },
+    {
+      "name": "zoom_level",
+      "value": 1000,
+      "bind": {
+        "input": "range",
+        "min": 800,
+        "max": 2500,
+        "step": 50,
+        "name": "Zoom: "
+      }
+    },
+    {
+      "name": "center_to",
+      "value": [134, -27],
+      "bind": {
+        "input": "select",
+        "options": [
+            [134, -27],
+            [151, -27],
+            [145.5, -36.5],
+            [146.5, -19],
+            [134, -25],
+            [121, -25],
+            [144.5, -42],
+            [135, -31],
+            [133, -19]
+        ],
+        "labels": [
+            "Australia",
+            "New South Wales",
+            "Victoria",
+            "Queensland",
+            "South Australia",
+            "Western Australia",
+            "Tasmania",
+            "Australian Capital Territory",
+            "Northern Territory"
+        ],
+        "name": "Map Centre: "
+      }
+    }
+  ],
+  "width": "container",
+  "height": 600,
+  "projection": {
+    "type": "equirectangular",
+    "center": {"expr": "center_to"},
+    "scale": {"expr": "zoom_level"}
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "../data/aus_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "floralwhite",
+        "stroke": "darkgrey",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {"url": "../data/centroids.csv"},
+      "transform": [
+        {"filter": "datum.species == selectedBird"},
+        {
+          "calculate": "timeFormat(datetime(2000, datum.month - 1, 1), '%b')",
+          "as": "monthName"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "line",
+            "strokeWidth": 5,
+            "color": "darkslategrey",
+            "opacity": 0.6
+          },
+          "encoding": {
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "order": {"field": "month", "type": "quantitative"}
+          }
+        },
+        {
+          "mark": {
+            "type": "circle",
+            "size": 150,
+            "filled": true,
+            "fill": "darkslategrey",
+            "opacity": 0.7,
+            "stroke": null
+          },
+          "encoding": {
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "tooltip": [
+              {"field": "species", "type": "nominal", "title": "Bird"},
+              {"field": "monthName", "type": "nominal", "title": "Month"},
+              {
+                "field": "n",
+                "type": "quantitative",
+                "title": "Recorded sightings",
+                "format": ","
+              },
+              {
+                "field": "lat",
+                "type": "quantitative",
+                "title": "Latitude",
+                "format": ".3f"
+              },
+              {
+                "field": "lon",
+                "type": "quantitative",
+                "title": "Longitude",
+                "format": ".3f"
+              }
+            ]
+          }
+        },
+        {
+          "transform": [
+            {"filter": "datum.month == selected_month"}
+          ],
+          "mark": {
+            "type": "circle",
+            "size": 150,
+            "fill": "orangered",
+            "opacity": 0.8,
+            "stroke": "orangered",
+            "strokeWidth": 3
+          },
+          "encoding": {
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "longitude": {"field": "lon", "type": "quantitative"}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "dy": -13,
+            "fontSize": 14,
+            "fontWeight": "bold"
+          },
+          "encoding": {
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "text": {"field": "monthName", "type": "nominal"},
+            "color": {
+              "condition": {
+                "test": "datum.month == selected_month",
+                "value": "orangered"
+              },
+              "value": "#253D32"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "background": "#FFFFE0",
+    "font": "Open Sans",
+    "view": {"stroke": null},
+    "title": {
+      "font": "Open Sans",
+      "fontSize": 18,
+      "fontWeight": 700,
+      "color": "black",
+      "subtitleFont": "Open Sans",
+      "subtitleFontSize": 12,
+      "subtitleColor": "#303632"
+    },
+    "legend": {
+      "titleFont": "Open Sans",
+      "labelFont": "Open Sans",
+      "titleFontSize": 12,
+      "labelFontSize": 11,
+      "titleColor": "black",
+      "labelColor": "black"
+    }
+  }
+}

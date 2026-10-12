@@ -1,0 +1,108 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": {"expr": "selectedBird + ': Sightings by Month and Year'"},
+        "subtitle": [
+            "Darker squares mean more sightings.",
+            "The outlined square marks each year's busiest month."],
+        "anchor": "middle",
+        "offset": 12
+    },
+    "data": {"url": "../data/species_year_month.csv"},
+    "params": [
+        {
+            "name": "selectedBird",
+            "value": "Rainbow Bee-eater",
+            "bind": {
+                "input": "select",
+                "options": [
+                    "Rainbow Bee-eater",
+                    "Eastern Koel",
+                    "Swift Parrot",
+                    "Eastern Curlew",
+                    "Dollarbird",
+                    "Channel-billed Cuckoo",
+                    "Budgerigar"
+                ],
+                "name": "Select a bird: "
+            }
+        }
+    ],
+    "width": 500,
+    "height": 400,
+    "padding": {"left": 0, "right": 0, "top": 5, "bottom": 5},
+    "autosize": {"type": "fit", "contains": "padding"},
+    "transform": [
+        {"filter": "datum.species == selectedBird"},
+        {"aggregate": [{"op": "sum", "field": "count", "as": "sightings"}], "groupby": ["species", "year", "month"]},
+        {"joinaggregate": [{"op": "max", "field": "sightings", "as": "yearMax"}], "groupby": ["year"]},
+        {"calculate": "timeFormat(datetime(2000, datum.month - 1, 1), '%b')", "as": "monthName"}
+    ],
+    "encoding": {
+        "x": {
+            "field": "monthName",
+            "type": "ordinal",
+            "sort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            "axis": {
+                "title": null,
+                "orient": "top",
+                "labelAngle": 0,
+                "labelFontSize": 10,
+                "labelPadding": 6,
+                "ticks": false,
+                "domain": false
+            }
+        },
+        "y": {
+            "field": "year",
+            "type": "ordinal",
+            "sort": "descending",
+            "axis": {"title": null, "labelFontSize": 11, "labelPadding": 6, "ticks": false, "domain": false}
+        }
+    },
+    "layer": [
+        {
+            "mark": {"type": "rect", "cornerRadius": 3, "stroke": "#FFFFE0", "strokeWidth": 2},
+            "encoding": {
+                "color": {
+                    "field": "sightings",
+                    "type": "quantitative",
+                    "scale": {"range": ["#f2f0f7", "#cbc9e2", "#9e9ac8", "#756bb1", "#54278f"], "zero": true},
+                    "legend": {
+                        "title": "Number of Sightings",
+                        "orient": "bottom",
+                        "direction": "horizontal",
+                        "gradientLength": 220,
+                        "titleFontSize": 11,
+                        "labelFontSize": 10,
+                        "labelExpr": "format(datum.value, ',')"
+                    }
+                },
+                "tooltip": [
+                    {"field": "species", "type": "nominal", "title": "Bird"},
+                    {"field": "year", "type": "ordinal", "title": "Year"},
+                    {"field": "monthName", "type": "ordinal", "title": "Month"},
+                    {"field": "sightings", "type": "quantitative", "title": "Recorded sightings", "format": ","}
+                ]
+            }
+        },
+        {
+            "transform": [{"filter": "datum.sightings == datum.yearMax"}],
+            "mark": {"type": "rect", "cornerRadius": 3, "fill": null, "stroke": "#253D32", "strokeWidth": 2.5}
+        }
+    ],
+    "config": {
+        "background": "#FFFFE0",
+        "font": "Open Sans",
+        "view": {"stroke": null},
+        "axis": {"grid": false},
+        "title": {
+            "font": "Open Sans",
+            "fontSize": 18,
+            "fontWeight": 700,
+            "color": "black",
+            "subtitleFont": "Open Sans",
+            "subtitleColor": "#303632"
+        }
+    }
+}
