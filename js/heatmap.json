@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": {
-        "text": {"expr": "selectedBird + ': Sightings by Month and Year'"},
+        "text": {"expr": "'Sightings of ' + selectedBird + ' by Month and Year'"},
         "subtitle": [
             "Darker squares mean more sightings.",
             "The outlined square marks each year's busiest month."],
