@@ -41,7 +41,7 @@
     },
     {
       "name": "zoom_level",
-      "value": 1000,
+      "value": 800,
       "bind": {
         "input": "range",
         "min": 800,
@@ -82,7 +82,7 @@
     }
   ],
   "width": "container",
-  "height": 600,
+  "height": 500,
   "projection": {
     "type": "equirectangular",
     "center": {"expr": "center_to"},
