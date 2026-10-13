@@ -218,14 +218,14 @@
         .catch(console.error);
 
       // proportional symbol
-      vegaEmbed("#hotspot", charts.hotspot, options)
+      vegaEmbed("#hotspot", charts.hotspot + "?v=2", options)
         .then(function (result) {
 
           // default bird
           updateBirdProfile("Rainbow Bee-eater");
 
           // update profile when dropdown changes
-          result.view.addSignalListener("chosen", function (name, value) {
+          result.view.addSignalListener("selectedBird", function (name, value) {
             updateBirdProfile(value);
           });
         })
