@@ -123,12 +123,22 @@
       </div>
     </section>
 
-      <!-- 3: Migration Patterns -->
+    <!-- 3: Migration Patterns -->
     <section class="section">
       <h2 class="section-title">Migration Patterns</h2>
 
       <div class="pure-u-1-1">
         <div id="path" class="vis-container"></div>
+      </div>
+
+      </section>
+    
+    <!-- 4: Popular Birds -->
+    <section class="section">
+      <h2 class="section-title">Rank of Popular Birds</h2>
+
+      <div class="pure-u-1-1">
+        <div id="bump_chart" class="vis-container"></div>
       </div>
 
       </section>
@@ -141,7 +151,8 @@
       hotspot: "hotspot.json",
       ridgeline: "ridgeline.json",
       heatmap: "heatmap.json",
-      path: "path.json"
+      path: "path.json",
+      bump_chart: "bump_chart.json"
     };
 
     // bird profile info
@@ -227,7 +238,10 @@
       vegaEmbed("#heatmap", charts.heatmap, options)
         .catch(console.error);
 
-      vegaEmbed("#path", charts.path, options)
+      vegaEmbed("#path", charts.path + "?v=2", options)
+        .catch(console.error);
+
+      vegaEmbed("#bump_chart", charts.bump_chart + "?v=2", options)
         .catch(console.error);
 
       });

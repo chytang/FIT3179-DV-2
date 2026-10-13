@@ -1,0 +1,91 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Ten Most Reported Birds in Australia (2019-2025)",
+        "subtitle": "Placeholder description."
+    },
+    "width": "container",
+    "height": 400,
+    "autosize": {"type": "fit", "contains": "padding"},
+    "padding": {"left": 5, "right": 25, "top": 5, "bottom": 5},
+    "data": {"url": "../data/top_species_by_year.csv"},
+    "encoding": {
+        "x": {"field": "year", "type": "ordinal", "title": null, "axis": {"labelAngle": 0}, "scale": {"padding": 0.5}},
+        "y": {
+            "field": "rank",
+            "type": "quantitative",
+            "title": "Rank",
+            "scale": {"domain": [0.5, 10.5], "reverse": true},
+            "axis": {"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "grid": false}
+        },
+        "color": {
+            "field": "species",
+            "type": "nominal",
+            "scale": {
+                "range": [
+                    "#332288",
+                    "#88CCEE",
+                    "#44AA99",
+                    "#117733",
+                    "#999933",
+                    "#DDCC77",
+                    "#CC6677",
+                    "#882255",
+                    "#AA4499",
+                    "#E69F00",
+                    "#D55E00",
+                    "#7F7F7F"
+                ]
+            },
+            "legend": null
+        }
+    },
+    "layer": [
+        {
+            "mark": {"type": "line", "strokeWidth": 3, "interpolate": "monotone"},
+            "encoding": {"opacity": {"condition": {"param": "pick", "value": 1}, "value": 0.2}}
+        },
+        {
+            "params": [{"name": "pick", "select": {"type": "point", "fields": ["species"], "on": "click", "clear": "dblclick"}}],
+            "mark": {"type": "circle", "size": 150, "stroke": "white", "strokeWidth": 1.5},
+            "encoding": {
+                "opacity": {"condition": {"param": "pick", "value": 1}, "value": 0.2},
+                "tooltip": [
+                    {"field": "species", "type": "nominal", "title": "Bird"},
+                    {"field": "year", "type": "ordinal", "title": "Year"},
+                    {"field": "rank", "type": "quantitative", "title": "Rank"},
+                    {"field": "count", "type": "quantitative", "title": "Sightings", "format": ","}
+                ]
+            }
+        },
+        {
+            "transform": [
+                {
+                    "window": [{"op": "max", "field": "year", "as": "lastYear"}],
+                    "groupby": ["species"],
+                    "frame": [null, null]
+                },
+                {"filter": "datum.year == datum.lastYear"}
+            ],
+            "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 11},
+            "encoding": {
+                "text": {"field": "species", "type": "nominal"},
+                "opacity": {"condition": {"param": "pick", "value": 1}, "value": 0.2}
+            }
+        }
+    ],
+    "config": {
+        "background": "#FFFFE0",
+        "font": "Open Sans",
+        "view": {"stroke": null},
+        "axis": {"grid": false},
+        "title": {
+            "font": "Open Sans",
+            "fontSize": 18,
+            "fontWeight": 700,
+            "color": "black",
+            "subtitleFont": "Open Sans",
+            "subtitleColor": "#303632"
+        }
+}
+}
