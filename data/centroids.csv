@@ -1,28 +1,28 @@
 species,month,lat,lon,n
-Rainbow Bee-eater,1,-27.36,142.34,18312
-Rainbow Bee-eater,2,-27.13,142.39,14125
-Rainbow Bee-eater,3,-24.48,144.01,15587
+Rainbow Bee-eater,1,-27.37,142.35,18343
+Rainbow Bee-eater,2,-27.14,142.4,14138
+Rainbow Bee-eater,3,-24.48,144.01,15589
 Rainbow Bee-eater,4,-21.12,143.74,15358
 Rainbow Bee-eater,5,-20.4,142.09,17225
-Rainbow Bee-eater,6,-19.95,141.26,20006
+Rainbow Bee-eater,6,-19.95,141.26,20007
 Rainbow Bee-eater,7,-19.07,140.64,23346
 Rainbow Bee-eater,8,-19.85,141.26,23753
 Rainbow Bee-eater,9,-21.75,142.59,19460
-Rainbow Bee-eater,10,-26.12,141.77,26741
-Rainbow Bee-eater,11,-27.22,141.68,18854
-Rainbow Bee-eater,12,-27.08,142.83,14297
+Rainbow Bee-eater,10,-26.13,141.77,26753
+Rainbow Bee-eater,11,-27.23,141.68,18876
+Rainbow Bee-eater,12,-27.08,142.83,14300
 Eastern Koel,1,-29.99,150.22,24414
 Eastern Koel,2,-29.25,150.22,9443
 Eastern Koel,3,-27.21,149.62,3393
 Eastern Koel,4,-24.36,147.59,523
 Eastern Koel,5,-24.01,147.98,143
-Eastern Koel,6,-27.2,148.6,30
+Eastern Koel,6,-27.36,148.68,31
 Eastern Koel,7,-25.61,147.21,49
 Eastern Koel,8,-24.33,148.03,234
 Eastern Koel,9,-26.31,149.32,4524
 Eastern Koel,10,-28.71,149.96,24022
-Eastern Koel,11,-29.47,150.0,27048
-Eastern Koel,12,-29.96,150.3,25341
+Eastern Koel,11,-29.47,150.0,27050
+Eastern Koel,12,-29.96,150.3,25343
 Swift Parrot,1,-42.88,147.31,352
 Swift Parrot,2,-42.53,147.14,255
 Swift Parrot,3,-39.32,146.44,329
@@ -47,8 +47,8 @@ Eastern Curlew,9,-24.32,145.27,4774
 Eastern Curlew,10,-24.76,145.35,6310
 Eastern Curlew,11,-26.78,146.94,5275
 Eastern Curlew,12,-28.39,148.16,5223
-Dollarbird,1,-29.05,149.17,18603
-Dollarbird,2,-28.22,148.4,9719
+Dollarbird,1,-29.05,149.17,18607
+Dollarbird,2,-28.22,148.4,9720
 Dollarbird,3,-23.5,145.22,5317
 Dollarbird,4,-16.91,138.57,1734
 Dollarbird,5,-16.83,138.62,232
@@ -56,21 +56,21 @@ Dollarbird,6,-19.28,145.17,67
 Dollarbird,7,-19.95,144.06,57
 Dollarbird,8,-17.8,139.45,125
 Dollarbird,9,-20.83,141.2,1821
-Dollarbird,10,-26.63,147.11,13093
-Dollarbird,11,-27.06,148.07,14135
-Dollarbird,12,-28.58,149.0,12691
+Dollarbird,10,-26.63,147.11,13095
+Dollarbird,11,-27.07,148.07,14150
+Dollarbird,12,-28.58,149.0,12697
 Channel-billed Cuckoo,1,-28.59,151.08,13809
 Channel-billed Cuckoo,2,-26.75,149.92,5402
 Channel-billed Cuckoo,3,-24.56,148.38,2255
 Channel-billed Cuckoo,4,-19.57,142.77,677
 Channel-billed Cuckoo,5,-16.47,137.72,300
-Channel-billed Cuckoo,6,-15.26,136.02,314
+Channel-billed Cuckoo,6,-15.32,136.06,315
 Channel-billed Cuckoo,7,-16.23,137.59,445
 Channel-billed Cuckoo,8,-19.02,139.82,478
 Channel-billed Cuckoo,9,-28.12,149.79,6020
-Channel-billed Cuckoo,10,-28.58,150.18,15614
+Channel-billed Cuckoo,10,-28.58,150.18,15615
 Channel-billed Cuckoo,11,-28.79,150.51,13176
-Channel-billed Cuckoo,12,-28.9,151.23,13666
+Channel-billed Cuckoo,12,-28.9,151.23,13665
 Budgerigar,1,-27.69,137.51,1361
 Budgerigar,2,-26.57,136.26,1133
 Budgerigar,3,-24.36,134.68,1528
@@ -83,15 +83,15 @@ Budgerigar,9,-27.37,137.63,5155
 Budgerigar,10,-28.51,137.96,4130
 Budgerigar,11,-30.0,139.57,1932
 Budgerigar,12,-30.04,140.24,1451
-Australian Magpie,1,-34.66,145.52,27680
-Australian Magpie,2,-34.43,145.81,21781
-Australian Magpie,3,-34.65,145.46,23403
-Australian Magpie,4,-34.33,145.57,24637
-Australian Magpie,5,-33.97,145.25,21610
-Australian Magpie,6,-33.56,145.57,22161
-Australian Magpie,7,-33.51,145.25,22637
-Australian Magpie,8,-33.82,145.5,23092
-Australian Magpie,9,-33.73,144.22,4295
-Australian Magpie,10,-34.21,144.22,4980
-Australian Magpie,11,-34.32,144.38,3748
-Australian Magpie,12,-34.41,144.94,3316
+Grey Fantail,1,-35.46,145.27,64615
+Grey Fantail,2,-35.52,145.44,46459
+Grey Fantail,3,-35.48,145.28,58077
+Grey Fantail,4,-34.04,145.75,71773
+Grey Fantail,5,-32.44,145.87,61865
+Grey Fantail,6,-31.71,146.53,57605
+Grey Fantail,7,-31.13,146.49,56807
+Grey Fantail,8,-32.16,146.33,60261
+Grey Fantail,9,-34.53,145.25,64401
+Grey Fantail,10,-35.12,145.57,70709
+Grey Fantail,11,-35.39,145.47,59161
+Grey Fantail,12,-35.46,145.55,56362
