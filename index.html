@@ -1588,7 +1588,7 @@
 
       spec.params = (spec.params || []).map(param => {
         if (param.name === "selectedBird") return { ...param, value: bird };
-        if (param.name === "selected_month") return { ...param, value: Number(monthSlider.value) };
+        if (param.name === "selectedMonth") return { ...param, value: Number(monthSlider.value) };
         return param;
       });
 
@@ -1621,7 +1621,7 @@
       const view = chartViews["path1"];
       if (!view) return;
 
-      view.signal("selected_month", month);
+      view.signal("selectedMonth", month);
       await view.runAsync();
     }
 
