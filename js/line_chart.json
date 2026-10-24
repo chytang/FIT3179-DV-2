@@ -78,7 +78,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["Rainbow Bee-eater", "Eastern Koel", "Swift Parrot", "Eastern Curlew", "Dollarbird", "Channel-billed Cuckoo", "Budgerigar", "Grey Fantail"],
-            "scheme": "tableau10"
+            "range": ["#865304", "#6FA8DC", "#DD872B", "#E26AF0", "#7651A8", "#48AB94", "#1F2E6B", "#BA1B00"]
           },
           "legend": null
         }
