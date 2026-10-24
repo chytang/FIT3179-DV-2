@@ -6,250 +6,1813 @@
   <title>Birdwatching in Australia</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <!-- Vega, Vega-Lite and Vega-Embed -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.33.1"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.23.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.29.0"></script>
 
-  <!-- Import pure.css (grid), plus the responsive grid that the pure-u-md-... classes need -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.1.0/build/pure-min.css"
-    integrity="sha384-kj0X2NG2KHBie8Tq8fH1kxnyWM9XsXQpq7XdwbKmFKjwwaXGKBlB2Klu3VOltSFx" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.1.0/build/grids-responsive-min.css"
-    integrity="sha384-YhmFRTDkeC9Ume8B/oi4qD/DhaNfszjPItSwx3dlivWW4/ZK2P8nPWD6hTKQ1dWN" crossorigin="anonymous">
+  <!-- Pure.css grid -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.1.0/build/pure-min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.1.0/build/grids-responsive-min.css">
 
-  <!-- Google font -->
+  <!-- Google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap&family=Lora:wght@600"
     rel="stylesheet">
 
-  <!-- CSS file -->
-  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-
   <div class="page">
 
-    <!-- intro -->
-    <header class="hero">
+    <!-- Introduction -->
+    <header>
       <h1>Birdwatching in Australia</h1>
-      <p class="lead">Placeholder text</p>
+      <p class="lead">
+        Explore bird sightings across Australia.
+        Discover where birds are recorded,
+        how sightings vary across regions and habitats,
+        and how patterns change across seasons and years.
+      </p>
     </header>
 
-    <!-- 1: Where Australians watch birds -->
-    <section class="section">
-      <h2 class="section-title">Where Australians watch Birds</h2>
+    <!-- Bird Gallery -->
+    <section>
+      <h2>Meet the Birds</h2>
+      <div class="description">
+        <p>Discover eight Australian bird species featured in this dashboard.</p>
+      </div>
 
-      <!-- text (1/3) + choropleth (2/3) -->
+      <div class="bird-gallery">
+        <div class="bird-gallery-card">
+          <img src="images/rainbow-bee-eater.jpg" alt="Rainbow Bee-eater">
+          <h3>Rainbow Bee-eater</h3>
+          <p><em>Merops ornatus</em></p>
+        </div>
+        <div class="bird-gallery-card">
+          <img src="images/eastern-koel.jpg" alt="Eastern Koel">
+          <h3>Eastern Koel</h3>
+          <p><em>Eudynamys orientalis</em></p>
+        </div>
+        <div class="bird-gallery-card">
+          <img src="images/swift-parrot.jpg" alt="Swift Parrot">
+          <h3>Swift Parrot</h3>
+          <p><em>Lathamus discolor</em></p>
+        </div>
+        <div class="bird-gallery-card">
+          <img src="images/eastern-curlew.jpg" alt="Eastern Curlew">
+          <h3>Eastern Curlew</h3>
+          <p><em>Numenius madagascariensis</em></p>
+        </div>
+        <div class="bird-gallery-card">
+          <img src="images/dollarbird.jpg" alt="Dollarbird">
+          <h3>Dollarbird</h3>
+          <p><em>Eurystomus orientalis</em></p>
+        </div>
+        <div class="bird-gallery-card">
+          <img src="images/channel-billed-cuckoo.jpg" alt="Channel-billed Cuckoo">
+          <h3>Channel-billed Cuckoo</h3>
+          <p><em>Scythrops novaehollandiae</em></p>
+        </div>
+        <div class="bird-gallery-card">
+          <img src="images/budgerigar.jpg" alt="Budgerigar">
+          <h3>Budgerigar</h3>
+          <p><em>Melopsittacus undulatus</em></p>
+        </div>
+        <div class="bird-gallery-card">
+          <img src="images/grey-fantail.jpg" alt="Grey Fantail">
+          <h3>Grey Fantail</h3>
+          <p><em>Rhipidura albiscapa</em></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1: Where Australians Watch Birds -->
+    <section>
+      <h2>Where Australians Watch Birds</h2>
+
+      <div class="description">
+        <h3>Who is watching?</h3>
+        <p>
+          Hover over the map to explore bird sightings across Australia.
+          Compare
+          <span class="measure-orange">total sightings</span> with
+          <span class="measure-green">sightings per person</span>
+          across states and territories.
+          <br>
+          <br>
+        </p>
+      </div>
+
+      <!-- Choropleth -->
       <div class="pure-g row">
         <div class="pure-u-1 pure-u-md-1-3">
-          <div class="description description-left">
-            <h3>Who is watching?</h3>
-            <p>
-              Compare bird sightings across Australian states by
-              <strong class="total-sightings">total sightings recorded</strong> and
-              <strong class="per-person">sightings per person</strong>.
-              Switch between the maps to explore reporting patterns.
-              Hover over a state to explore its data.
+          <div class="description">
+            <h3>What does the map reveal?</h3>
+            <p id="choropleth-description" aria-live="polite">
+              Select a measure to explore recorded bird sightings.
             </p>
-            <p class="note">
-              Higher sighting totals may reflect more birdwatchers or greater reporting activity, rather than greater
-              bird abundance.
+            <p id="log-description" class="note" hidden>
+              <strong>Scale:</strong>
+              Colours represent total bird sightings across states and territories.
+              Use the legend to compare sighting totals, shown in millions.
+            </p>
+            <p id="threshold-description" class="note" hidden>
+              <strong>Threshold scale:</strong>
+              Colours represent ranges of sightings per person. A higher value
+              means more recorded sightings relative to population, not more
+              birds per person.
             </p>
           </div>
         </div>
+
         <div class="pure-u-1 pure-u-md-2-3">
           <div id="choropleth" class="vis-container"></div>
         </div>
       </div>
 
-      <!-- hotspot map section -->
-      <div class="description">
-        <h3>Where do sightings cluster?</h3>
-        <p>
-          Each circle sits on a one-degree square of the map, roughly 110 km
-          from north to south. Larger circles indicate more sightings per grid
-          square. Use the dropdown under the map to select a bird and explore
-          where its sightings cluster. The numbers 1 to 3 mark the three busiest
-          squares.
-        </p>
-      </div>
-
-      <!-- proportional symbol map (2/3) + bird profile (1/3) -->
+      <!-- Hotspot Map -->
       <div class="pure-g row">
+        <div class="pure-u-1 pure-u-md-1-3">
+          <div class="description">
+            <h3>Where do sightings cluster?</h3>
+            <p>
+              Explore the locations with the most recorded sightings for the
+              selected bird. Each circle represents a one-degree grid square,
+              roughly 110 km from north to south. Larger circles represent
+              more records.
+            </p>
+            <p>
+              Hover over a circle to reveal its location and sighting count.
+              Use the bird selector to compare hotspot patterns across species.
+            </p>
+            <h4 id="hotspot-ranking-title">Top 3 Hotspots</h4>
+            <div id="hotspot-description" aria-live="polite">
+              Select a bird to explore its three busiest reporting locations.
+            </div>
+            <p class="note">
+              These rankings reflect recorded sightings in each grid square,
+              not the number of individual birds living there.
+            </p>
+          </div>
+        </div>
+
         <div class="pure-u-1 pure-u-md-2-3">
           <div id="hotspot" class="vis-container"></div>
         </div>
+      </div>
+    </section>
 
-        <div class="pure-u-1 pure-u-md-1-3">
-          <div class="bird-profile">
-            <img id="bird-photo" src="images/rainbow-bee-eater.jpg" alt="Rainbow Bee-eater">
-            <h4 id="bird-name">Rainbow Bee-eater</h4>
-            <p id="bird-scientific-name">
-              <em>Merops ornatus</em>
+    <!-- 2: Landscape and Habitat -->
+    <section>
+      <h2>Landscape and Habitat</h2>
+      <div class="description">
+        <p>
+          Explore elevation and coastal distance using a sample of 3,000
+          sightings per bird.
+        </p>
+      </div>
+
+      <div class="pure-g row">
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div class="description">
+            <h3>Where do these birds live?</h3>
+            <p>
+              Explore bird sightings across Australia's coastal, elevated and
+              inland landscapes. Compare species to discover differences in
+              their geographic distributions.
+            </p>
+          </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div class="description">
+            <h3>How to read the maps</h3>
+            <p>
+              The left map shows elevation above sea level, while the right
+              shows proximity to the coast. Pink dots indicate recorded
+              sightings of the selected bird.
             </p>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- 2: A Year in the Life of the Birds -->
-     <section class="section">
-      <h2 class="section-title">A Year in the Life of the Birds</h2>
-
-      <!-- hotspot map section -->
-      <div class="description">
-        <h3>When in the year is each bird reported?</h3>
+      <!-- Elevation and Coast Maps -->
+      <div class="pure-g row">
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div id="elevation_map" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div id="coast_map" class="vis-container"></div>
+        </div>
       </div>
 
-      <!-- ridgeline (1/2) + heatmap (1/2) -->
+      <!-- Chart explanations -->
       <div class="pure-g row">
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div class="description">
+            <h3>Reading the elevation bars</h3>
+            <p>
+              Each bar represents 100% of a bird's recorded sightings, divided
+              into elevation bands that use the same colours as the map. Birds
+              are sorted from lowest to highest elevation.
+            </p>
+            <p>
+              <strong>Key insights:</strong>
+              Most species are recorded at low elevations, while Budgerigars
+              stand out for their inland distribution. From the sample, nearly
+              all Eastern Curlew sightings occur below 100 m.
+            </p>
+          </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div class="description">
+            <h3>Reading the coast chart</h3>
+            <p>
+              The dot marks the median distance from the coast, while the bar
+              shows the middle 50% of sightings. The square-root scale makes
+              distances near the coast easier to compare, so equal gaps do not
+              represent equal distances.
+            </p>
+            <p>
+              <strong>Key insights:</strong>
+              Most species have a median distance of less than 50 km from the
+              coast. Budgerigars stand out, with a median distance of about
+              540 km inland, consistent with their inland distribution.
+            </p>
+          </div>
+        </div>
+      </div>
 
-        <!-- L: ridgeline -->  
+      <!-- Elevation and Coast Charts -->
+      <div class="pure-g row">
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div id="elevation_bands" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div id="coast_range" class="vis-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3: Seasonal Patterns -->
+    <section>
+      <h2>Seasonal Patterns in Bird Activity</h2>
+      <div class="description">
+        <p>
+          Birds are not reported evenly through the year.
+          Compare when each species is most often recorded and
+          how its seasonal patterns change between years.
+        </p>
+      </div>
+
+      <!-- Chart explanations -->
+      <div class="pure-g row">
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div class="description">
+            <h3>Reading the ridgeline plot</h3>
+            <p>
+              Each shape shows how one bird's sightings are spread across the
+              twelve months. Higher parts mean a larger share of that bird's
+              annual sightings fall in that month, and the label marks its
+              busiest month. Compare the timing of the peaks rather than the
+              heights between birds.
+            </p>
+            <p>
+              <strong>Key insights:</strong>
+              Eastern Curlew and Dollarbird peak in January, Channel-billed
+              Cuckoo in October and Eastern Koel in November. Swift Parrot peaks
+              in autumn (May) and Budgerigar in winter (August), while Grey
+              Fantail sightings are spread fairly evenly across the year.
+            </p>
+          </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div class="description">
+            <h3>Reading the heatmap</h3>
+            <p>
+              Each square is one month of one year for the bird chosen in the
+              dropdown. Darker squares mean more sightings, and the outlined
+              square marks each year's busiest month. Read across a row to see
+              a year's seasonal pattern, and down a column to see whether a
+              month is busy year after year.
+            </p>
+            <p>
+              <strong>Key insights:</strong>
+              <span id="heatmap-description" aria-live="polite">
+                Select a bird to explore its seasonal sighting patterns.
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ridgeline and Heatmap -->
+      <div class="pure-g row">
         <div class="pure-u-1 pure-u-md-1-2">
           <div id="ridgeline" class="vis-container"></div>
         </div>
-
-        <!-- R: heatmap + description -->  
         <div class="pure-u-1 pure-u-md-1-2">
           <div id="heatmap" class="vis-container"></div>
-        
-          <div class="ridgeline-description">
-            <p>Placeholder text analysing trends.</p>
+          <p class="note">
+            <strong>Continuous legend:</strong>
+            Colour intensity represents sightings within the selected bird. The
+            colour scale adjusts to each bird's sighting counts, so the maximum
+            varies between species.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4: Annual Trends -->
+    <section>
+      <h2>How Sightings Change Over Time</h2>
+
+      <div class="pure-g row">
+        <div class="pure-u-1 pure-u-md-1-3">
+          <div class="description">
+            <h3>How are sightings changing?</h3>
+            <p>
+              Use the bird selectors to choose multiple species and
+              compare their sighting trends over time.
+              <br>
+              <br>
+
+              Recorded sightings of the leading bird species generally increased
+              between 2019 and 2024. The Grey Fantail remained the most
+              frequently recorded species out of the 8 birds throughout, with
+              sightings rising from around 65,442 in 2019 to 104,485 in 2025.
+              <br>
+              <br>
+            </p>
+            <p>
+              However, sightings declined across all eight birds in 2025,
+              following several years of growth.
+              <br>
+              <br>
+            </p>
+            <p class="note">
+              <strong>Logarithmic scale:</strong>
+              The vertical axis uses a logarithmic scale, allowing bird species
+              with both smaller and larger sighting counts to be compared more
+              easily. Equal distances represent proportional changes rather than
+              equal increases in sightings.
+            </p>
+          </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-2-3">
+          <div id="line_chart" class="vis-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5: Migration Patterns -->
+    <section>
+      <h2>Migration Patterns Across Australia</h2>
+      <div class="description">
+        <p>
+          Explore how the locations of recorded sightings change throughout
+          the year. Select a bird in the map's dropdown, then move the slider
+          to step through the months.
+        </p>
+      </div>
+
+      <div class="pure-g row">
+        <div class="pure-u-1 pure-u-md-1-3">
+          <div class="description">
+            <h3 id="migration-bird-title">Rainbow Bee-eater</h3>
+            <p id="migration-focus-description" class="note">
+              Regional focus: Queensland.
+              <br>
+              <br>
+            </p>
+            <p id="path-description-1" aria-live="polite">
+              Explore how the locations of recorded sightings change throughout
+              the year.
+            </p>
+            <p>
+              <br>
+              <strong>Reading the map:</strong>
+              The path joins the average location of the bird's sightings in
+              each month, labelled from January to December. The highlighted
+              marker shows the month chosen on the slider.
+              <br>
+              <br>
+            </p>
+            <p class="note">
+              Sightings show where people report birds, so shifts in the path
+              may reflect where people are watching as well as where birds are.
+            </p>
+          </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-2-3">
+          <div id="path1" class="vis-container"></div>
+
+          <div class="month-slider">
+            <div class="month-slider-heading">
+              <label for="shared-month">Explore the month</label>
+              <strong id="shared-month-name">January</strong>
+            </div>
+            <input type="range" id="shared-month" min="1" max="12" step="1" value="1"
+              aria-label="Select month for the migration map">
+            <div class="month-endpoints">
+              <span>Jan</span>
+              <span>Dec</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 3: Migration Patterns -->
-    <section class="section">
-      <h2 class="section-title">Migration Patterns</h2>
+    <!-- 6: Popular Birds -->
+    <section>
+      <h2>Rankings of the Most Observed Birds</h2>
 
-      <div class="pure-u-1-1">
-        <div id="path" class="vis-container"></div>
+      <div class="pure-g row">
+        <div class="pure-u-1 pure-u-md-1-3">
+          <div class="description">
+            <h3>Reading the rankings</h3>
+            <p>
+              Each line follows one bird's rank among the ten most reported
+              birds in Australia, year by year from 2019 to 2025. A line at the
+              top means the bird was reported more than any other species that
+              year. Select a bird in the dropdown to highlight its path.
+              <br>
+              <br>
+            </p>
+
+            <h4>What stands out</h4>
+            <p>
+              The Australian Magpie ranks first in every year. The Rainbow
+              Lorikeet finishes 2025 in second place, ahead of the Magpie-lark,
+              while the order further down the chart changes more from year to
+              year.
+            </p>
+            <p class="note">
+              Rankings are based on recorded sightings, so they reflect how
+              often people report each bird as well as how common it is.
+            </p>
+          </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-2-3">
+          <div id="bump_chart" class="vis-container"></div>
+        </div>
       </div>
 
-      </section>
-    
-    <!-- 4: Popular Birds -->
-    <section class="section">
-      <h2 class="section-title">Rank of Popular Birds</h2>
-
-      <div class="pure-u-1-1">
-        <div id="bump_chart" class="vis-container"></div>
+      <!-- Chart explanations -->
+      <div class="pure-g row">
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div class="description">
+            <h3>How big are the gaps?</h3>
+            <p>
+              Each bar is one bird's recorded sightings in the chosen year,
+              sorted from most to fewest. Change the year to see how the order
+              and the gaps shift. The bird selected in the rankings dropdown
+              above is also highlighted here.
+            </p>
+          </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div class="description">
+            <h3>Who grew the most?</h3>
+            <p>
+              Each dot shows the percentage change in a bird's recorded sightings from 2019 to 2025.
+              Dots further to the right indicate larger increases.
+              Only birds ranked in the top ten in both years are shown.
+              Hover over a dot to see actual counts, as percentage can exaggerate changes for birds with fewer initial
+              sightings.
+            </p>
+          </div>
+        </div>
       </div>
 
-      </section>
+      <!-- Ranked bar and change charts -->
+      <div class="pure-g row">
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div id="ranked_bar" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div id="lollipop" class="vis-container"></div>
+        </div>
+      </div>
+    </section>
 
-</div> <!-- end page -->
+    <!-- Sources -->
+    <section>
+      <h2>Sources and Acknowledgements</h2>
+      <div class="description">
+        <p>FIT3179 Data Visualisation 2 Assignment by Chloe Tang. Last updated 24 October 2026.</p>
+      </div>
 
-  <script type="text/javascript">
-    var charts = {
-      choropleth: "choropleth.json",
-      hotspot: "hotspot.json",
-      ridgeline: "ridgeline.json",
-      heatmap: "heatmap.json",
-      path: "path.json",
-      bump_chart: "bump_chart.json"
-    };
+      <div class="pure-g row">
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div class="description">
+            <h3>Data and Mapping</h3>
+            <ul>
+              <li><a href="https://www.ala.org.au/" target="_blank" rel="noopener noreferrer">Atlas of Living Australia
+                  (ALA)</a></li>
+              <li><a
+                  href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files"
+                  target="_blank" rel="noopener noreferrer">Australian Bureau of Statistics, Digital Boundary Files</a>
+              </li>
+              <li><a
+                  href="https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/latest-release"
+                  target="_blank" rel="noopener noreferrer">Australian Bureau of Statistics, National, state and
+                  territory population</a></li>
+              <li><a href="https://www.naturalearthdata.com/downloads/110m-physical-vectors/" target="_blank"
+                  rel="noopener noreferrer">Natural Earth Data, Land</a></li>
+              <li><a href="https://www.gebco.net/data-products/gridded-bathymetry-data" target="_blank"
+                  rel="noopener noreferrer">GEBCO, Gridded Bathymetry Data</a></li>
+              <li><a href="https://vega.github.io/vega-lite/" target="_blank" rel="noopener noreferrer">Vega-Lite,
+                  Declarative Visualisation Grammar</a></li>
+            </ul>
+          </div>
+        </div>
 
-    // bird profile info
-    const birdProfiles = {
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div class="description">
+            <h3>Image Credits</h3>
+            <ul>
+              <li><a
+                  href="https://commons.wikimedia.org/wiki/File:Rainbow_Bee-eater_%28Merops_ornatus%29_%2822119409033%29.jpg"
+                  target="_blank" rel="noopener noreferrer">Rainbow Bee-eater image</a></li>
+              <li><a href="https://commons.wikimedia.org/wiki/File:Pacific_Koel_-_Long_Reef.jpg" target="_blank"
+                  rel="noopener noreferrer">Eastern Koel image</a></li>
+              <li><a href="https://commons.wikimedia.org/wiki/File:Swift_parrot.jpg" target="_blank"
+                  rel="noopener noreferrer">Swift Parrot image</a></li>
+              <li><a href="https://animalia.bio/far-eastern-curlew" target="_blank" rel="noopener noreferrer">Eastern
+                  Curlew image</a></li>
+              <li><a href="https://commons.wikimedia.org/wiki/File:Eurystomus_orientalis_256305863.jpg" target="_blank"
+                  rel="noopener noreferrer">Dollarbird image</a></li>
+              <li><a href="https://animalia.bio/channel-billed-cuckoo" target="_blank"
+                  rel="noopener noreferrer">Channel-billed Cuckoo image</a></li>
+              <li><a href="https://commons.wikimedia.org/wiki/File:Blue_male_budgie.jpg" target="_blank"
+                  rel="noopener noreferrer">Budgerigar image</a></li>
+              <li><a href="https://mittavalleylandcaregroup.com/2023/04/19/grey-fantail/" target="_blank"
+                  rel="noopener noreferrer">Grey Fantail image</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // ---------- Data ----------
+
+    const standardCharts = [
+      "choropleth", "hotspot", "ridgeline", "heatmap", "bump_chart", "line_chart",
+      "elevation_map", "coast_map", "elevation_bands", "coast_range", "ranked_bar", "lollipop"
+    ];
+
+    const MIGRATION_MAP_HEIGHT = 460;
+    const MIGRATION_MAP_ZOOM = 2;
+
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    const birds = {
       "Rainbow Bee-eater": {
-        photo: "images/rainbow-bee-eater.jpg",
-        scientific: "Merops ornatus"
+        center: [142, -23],
+        scale: 1000,
+        focus: "Queensland"
       },
       "Eastern Koel": {
-        photo: "images/eastern-koel.jpg",
-        scientific: "Eudynamys orientalis"
+        center: [151, -27],
+        scale: 1500,
+        focus: "Eastern Australia, including Queensland and New South Wales"
       },
       "Swift Parrot": {
-        photo: "images/swift-parrot.jpg",
-        scientific: "Lathamus discolor"
+        center: [147, -38],
+        scale: 1000,
+        focus: "South-eastern Australia, including Tasmania, Victoria and New South Wales"
       },
       "Eastern Curlew": {
-        photo: "images/eastern-curlew.jpg",
-        scientific: "Numenius madagascariensis"
+        center: [147, -25],
+        scale: 1300,
+        focus: "Queensland"
       },
       "Dollarbird": {
-        photo: "images/dollarbird.jpg",
-        scientific: "Eurystomus orientalis"
+        center: [147, -23],
+        scale: 800,
+        focus: "Queensland"
       },
       "Channel-billed Cuckoo": {
-        photo: "images/channel-billed-cuckoo.jpg",
-        scientific: "Scythrops novaehollandiae"
+        center: [148, -22],
+        scale: 750,
+        focus: "Eastern Australia, including the Northern Territory, New South Wales and Queensland"
       },
       "Budgerigar": {
-        photo: "images/budgerigar.jpg",
-        scientific: "Melopsittacus undulatus"
+        center: [138, -26],
+        scale: 1300,
+        focus: "Central Australia"
       },
-      "Australian Magpie": {
-        photo: "images/australian-magpie.jpg",
-        scientific: "Gymnorhina tibicen"
+      "Grey Fantail": {
+        center: [145, -33],
+        scale: 2000,
+        focus: "New South Wales"
       }
     };
 
-    // update bird profiles
-    function updateBirdProfile(bird) {
-      const profile = birdProfiles[bird];
+    const birdDescriptions = {
+      "Rainbow Bee-eater":
+        "Recorded sightings are concentrated in northern and eastern Australia. Follow the monthly markers to explore how the reported locations shift throughout the year.",
 
-      if (!profile) return;
+      "Eastern Koel":
+        "Sightings are concentrated in eastern Australia, with activity increasing in the warmer months. Explore how the reported locations change across the seasons.",
 
-      const photo = document.getElementById("bird-photo");
-      photo.src = profile.photo;
-      photo.alt = bird;
+      "Swift Parrot":
+        "Sightings are concentrated in south-eastern Australia. Follow the monthly pattern to explore how recorded locations vary throughout the year.",
 
-      document.getElementById("bird-name").textContent = bird;
+      "Eastern Curlew":
+        "Sightings are concentrated around coastal and estuarine areas. Explore how the recorded locations change between months.",
 
-      document.getElementById("bird-scientific-name").innerHTML =
-        `<em>${profile.scientific}</em>`;
+      "Dollarbird":
+        "Sightings are concentrated in eastern and northern Australia. Explore how their reported locations vary throughout the warmer months.",
+
+      "Channel-billed Cuckoo":
+        "Sightings are concentrated in northern and eastern Australia, particularly in warmer months. Follow the monthly markers to explore their changing distribution.",
+
+      "Budgerigar":
+        "Sightings are concentrated across inland Australia. Explore how the locations of recorded sightings vary across the year.",
+
+      "Grey Fantail":
+        "Sightings occur across south-eastern Australia and other regions. Follow the monthly pattern to explore how recorded locations vary throughout the year."
+    };
+
+    const heatmapDescriptions = {
+      "Rainbow Bee-eater":
+        "October is the busiest month for recorded Rainbow Bee-eater sightings overall. It was also the peak month in six of the seven years, although July was busiest in 2025.",
+
+      "Eastern Koel":
+        "Eastern Koel sightings cluster from October to January, with November recording the highest total overall. Records are much lower between May and August.",
+
+      "Swift Parrot":
+        "Swift Parrot sightings are concentrated in autumn and early winter, especially April to June, with May the busiest month overall.",
+
+      "Eastern Curlew":
+        "January is the busiest month overall for Eastern Curlew sightings and was the annual peak in five of the seven years. October stands out in 2023 and 2024.",
+
+      "Dollarbird":
+        "Dollarbird sightings peak in the warmer months, especially January. Records fall sharply from May to August before increasing again in spring.",
+
+      "Channel-billed Cuckoo":
+        "Channel-billed Cuckoo sightings concentrate from October to January, with October the busiest month overall. Records are much lower from April to August.",
+
+      "Budgerigar":
+        "Budgerigar sightings increase through autumn and winter, reaching their highest overall total in August. July to September are particularly active months.",
+
+      "Grey Fantail":
+        "Grey Fantail sightings occur throughout the year. October had the highest monthly total from 2019 to 2024, while April was the peak in 2025."
+    };
+
+    const choroplethDescriptions = {
+      "Total Sightings":
+        "New South Wales has the highest total among the states, with 13.5 million recorded sightings. Victoria follows with 13.2 million and Queensland with 13.0 million.\n\nTogether, these three states account for about 39.68 million recorded sightings. Higher totals may reflect population size and reporting activity as well as birdwatching interest.\n\n",
+
+      "Sightings Per Person":
+        "The Northern Territory has the highest rate (7.06 sightings per person), followed by the Australian Capital Territory (4.55) and Tasmania (3.21). Western Australia has the lowest rate (1.27).\n\nUnlike total sightings, this measure accounts for population size. Despite having just 269,000 residents, the Northern Territory has a higher per-person rate than New South Wales, which has 8.67 million residents."
+    };
+
+    const hotspotDescriptions = {
+      "Rainbow Bee-eater":
+        "1st: Brisbane region, 29,338 sightings.\n2nd: Gold Coast region, 17,392 sightings.\n3rd: Darwin region, 17,038 sightings.",
+
+      "Eastern Koel":
+        "1st: Sydney region, 19,546 sightings.\n2nd: Brisbane region, 15,057 sightings.\n3rd: Canberra region, 10,728 sightings.",
+
+      "Swift Parrot":
+        "1st: Southern Tasmania, 2,818 sightings.\n2nd: South-east Victoria, 1,496 sightings.\n3rd: Sydney region, 1,281 sightings.",
+
+      "Eastern Curlew":
+        "1st: Brisbane region, 9,396 sightings.\n2nd: Cairns region, 7,273 sightings.\n3rd: Newcastle region, 3,436 sightings.",
+
+      "Dollarbird":
+        "1st: Sydney region, 8,032 sightings.\n2nd: Brisbane region, 7,388 sightings.\n3rd: Gold Coast region, 5,787 sightings.",
+
+      "Channel-billed Cuckoo":
+        "1st: Sydney region, 15,409 sightings.\n2nd: Brisbane region, 13,069 sightings.\n3rd: Gold Coast region, 10,686 sightings.",
+
+      "Budgerigar":
+        "1st: Alice Springs region, 2,947 sightings.\n2nd: South-west Queensland, 1,543 sightings.\n3rd: Queensland and NSW border region, 1,159 sightings.",
+
+      "Grey Fantail":
+        "1st: South-east Victoria, 87,987 sightings.\n2nd: Brisbane region, 48,096 sightings.\n3rd: Canberra region, 43,366 sightings."
+    };
+
+    // ---------- Callout content and positions ----------
+
+    const CALLOUTS = {
+
+      choropleth: {
+        signal: "chosen",
+        pos: { left: "4%", top: "250px", w: "190px" },
+        items: {
+          "Total Sightings":
+            `<span class="k-green">Western Australia</span> is the largest state in Australia but records a lower number of sightings (<strong>3.1 million</strong>).`,
+          "Sightings Per Person":
+            `The <span class="k-green">Australian Capital Territory</span> ranks second in sightings per person (4.55), despite its small size.`
+        }
+      },
+
+      hotspot: {
+        signal: "selectedBird",
+        pos: { left: "3%", top: "330px", w: "180px" },
+        items: {
+          "Rainbow Bee-eater":
+            `<span class="k-green">Darwin's</span> grid square ranks third with <strong>17,038 sightings</strong>, despite the Northern Territory's small population.`,
+          "Eastern Koel":
+            `All three busiest squares are around cities: <span class="k-green">Sydney</span> leads with <strong>19,546 sightings</strong>.`,
+          "Swift Parrot":
+            `Swift Parrot records are far scarcer: the busiest square, in <span class="k-green">southern Tasmania</span>, has just <strong>2,818 sightings</strong>.`,
+          "Eastern Curlew":
+            `All three hotspots are on the coast, led by the <span class="k-green">Brisbane</span> region with <strong>9,396 sightings</strong>.`,
+          "Dollarbird":
+            `<span class="k-green">Sydney</span> slightly leads Brisbane, with <strong>8,032 vs 7,388 sightings</strong>.`,
+          "Channel-billed Cuckoo":
+            `All three hotspots are on the east coast, with <span class="k-green">Sydney</span> ahead of Brisbane by about <strong>2,300 sightings</strong>.`,
+          "Budgerigar":
+            `Budgerigar hotspots are inland, led by <span class="k-green">Alice Springs</span> with <strong>2,947 sightings</strong>, far from the big coastal cities.`,
+          "Grey Fantail":
+            `<span class="k-green">South-east Victoria</span> has <strong>87,987 sightings</strong>, the largest single square of any bird here.`
+        }
+      },
+
+      elevation_map: {
+        signal: "selectedBird",
+        pos: { left: "1%", top: "305px", w: "270px" },
+        items: {
+          "Rainbow Bee-eater":
+            `<span class="k-green">Rainbow Bee-eaters</span> are mostly recorded at lower elevations, with the middle 80% of sightings between <strong>2 and 369 m</strong>.`,
+          "Channel-billed Cuckoo":
+            `<span class="k-green">Channel-billed Cuckoos</span> are mostly recorded at lower elevations, with the middle 80% of sightings between <strong>3 and 354 m</strong>.`,
+          "Dollarbird":
+            `<span class="k-green">Dollarbirds</span> are recorded across a wider range of elevations, with the middle 80% of sightings between <strong>3 and 558 m</strong>.`,
+          "Eastern Curlew":
+            `<span class="k-green">Eastern Curlews</span> are recorded at very low elevations, with the middle 80% of sightings between <strong>0 and 7 m</strong>.`,
+          "Eastern Koel":
+            `<span class="k-green">Eastern Koels</span> are recorded at lower elevations, with the middle 80% of sightings between <strong>2 and 597 m</strong>.`,
+          "Swift Parrot":
+            `<span class="k-green">Swift Parrots</span> are recorded at lower elevations, with the middle 80% of sightings between <strong>6 and 447 m</strong>.`,
+          "Budgerigar":
+            `<span class="k-green">Budgerigars</span> are commonly recorded across the inland plains, mostly between <strong>50 and 560 m</strong>.`,
+          "Grey Fantail":
+            `<span class="k-green">Grey Fantails</span> are recorded across a range of elevations, with some sightings reaching above <strong>1,000 m</strong>.`
+        }
+      },
+
+      coast_map: {
+        signal: "selectedBird",
+        pos: { left: "1%", top: "305px", w: "270px" },
+        items: {
+          "Rainbow Bee-eater":
+            `<span class="k-green">Rainbow Bee-eaters</span> are often recorded near the coast, with about <strong>40% of sightings within 10 km</strong> of the shore.`,
+          "Eastern Koel":
+            `<span class="k-green">Eastern Koels</span> are commonly recorded near the coast, with around <strong>75% of sightings within 50 km</strong> of the shore.`,
+          "Swift Parrot":
+            `<span class="k-green">Swift Parrots</span> are recorded across coastal and inland areas, with nearly <strong>70% of sightings within 50 km</strong> of the coast.`,
+          "Eastern Curlew":
+            `<span class="k-green">Eastern Curlews</span> are strongly concentrated near the shoreline, with <strong>86% of sightings within 10 km</strong> of the coast.`,
+          "Dollarbird":
+            `<span class="k-green">Dollarbirds</span> are mostly recorded within <strong>200 km of the coast</strong>, although some sightings extend much further inland.`,
+          "Channel-billed Cuckoo":
+            `<span class="k-green">Channel-billed Cuckoos</span> are commonly recorded near the coast, with around <strong>85% of sightings within 50 km</strong> of the shore.`,
+          "Budgerigar":
+            `<span class="k-green">Budgerigars</span> are strongly associated with inland records, with about <strong>66% of sightings more than 400 km</strong> from the sea.`,
+          "Grey Fantail":
+            `<span class="k-green">Grey Fantails</span> are commonly recorded near the coast, with around <strong>64% of sightings within 50 km</strong> of the shore.`
+        }
+      },
+
+      elevation_bands: {
+        always: [
+          {
+            left: "50%", top: "270px", w: "190px",
+            html: `Only about <strong>1 in 5</strong> <span class="k-green">Budgerigar</span> sightings are below 100 m, the lowest share of any bird.`
+          }
+        ]
+      },
+
+      coast_range: {
+        always: [
+          {
+            left: "24%", top: "58px", w: "150px",
+            html: `Half of <span class="k-green">Eastern Curlew</span> sightings are within <strong>6 km</strong> of the shore.`
+          },
+          {
+            left: "18%", top: "345px", w: "150px",
+            html: `<span class="k-green">Budgerigar</span> is the only bird typically far inland: median <strong>538 km</strong> from the sea.`
+          }
+        ]
+      },
+
+      ridgeline: {
+        always: [
+          {
+            left: "36%", top: "50px", w: "420px",
+            html: `<span class="k-green">Grey Fantail</span> peaks in April overall (<strong>71,773 sightings</strong>), narrowly ahead of October (<strong>70,709</strong>). October leads from 2019 to 2024, but unusually low counts in late 2025 shifts the overall peak to April.`
+          }
+        ]
+      },
+
+      heatmap: {
+        signal: "selectedBird",
+        pos: { left: "56%", top: "330px", w: "255px" },
+        items: {
+          "Rainbow Bee-eater":
+            `<span class="k-green">October</span> is the peak in <strong>6 of 7 years</strong>. In 2025, July was busiest.`,
+          "Eastern Koel":
+            `Records cluster from <strong>October to January</strong>, peaking in <span class="k-green">November</span>.`,
+          "Swift Parrot":
+            `Autumn and early winter dominate, with <span class="k-green">May</span> the busiest month overall.`,
+          "Eastern Curlew":
+            `<span class="k-green">January</span> is the annual peak in <strong>5 of 7 years</strong>; October stands out in 2023 and 2024.`,
+          "Dollarbird":
+            `Records <strong>fall sharply from May to August</strong>, then rise again in spring.`,
+          "Channel-billed Cuckoo":
+            `<span class="k-green">October</span> is busiest, with very few records from <strong>April to August</strong>.`,
+          "Budgerigar":
+            `Records build through autumn and winter, peaking in <span class="k-green">August</span>.`,
+          "Grey Fantail":
+            `Sightings occur <strong>all year</strong>. October led from 2019 to 2024, but April led in 2025.`
+        }
+      },
+
+      line_chart: {
+        always: [
+          {
+            left: "9%", top: "72px", w: "520px",
+            html: '<span class="k-green">Budgerigar</span> had the largest increase in recorded sightings since 2019, rising by <span class="k-green">73%</span>.'
+          }
+        ]
+      },
+
+      path1: {
+        pos: { left: "2%", top: "470px", w: "300px" },
+        items: {
+          "Rainbow Bee-eater":
+            `<span class="k-green"><strong>Rainbow Bee-eater</strong></span> sightings shift north from <strong>southern inland Australia</strong> towards <strong>northwestern Queensland</strong> from January to July, before shifting south again. Sightings are busiest in <strong>October</strong>.`,
+
+          "Eastern Koel":
+            `<span class="k-green"><strong>Eastern Koel</strong></span> sightings shift northwest from <strong>northern New South Wales</strong> towards <strong>central Queensland</strong> from January to June, before shifting southeast again. Sightings are busiest in <strong>November</strong>.`,
+
+          "Swift Parrot":
+            `<span class="k-green"><strong>Swift Parrot</strong></span> sightings shift north from <strong>Tasmania</strong> towards <strong>southeastern mainland Australia</strong> from January to June, before shifting south again. Sightings are busiest in <strong>May</strong>.`,
+
+          "Eastern Curlew":
+            `<span class="k-green"><strong>Eastern Curlew</strong></span> sightings shift northwest from <strong>inland New South Wales</strong> towards <strong>central Queensland</strong> from January to June, before shifting southeast again. Sightings are busiest in <strong>January</strong>.`,
+
+          "Dollarbird":
+            `<span class="k-green"><strong>Dollarbird</strong></span> sightings shift northwest from <strong>northern New South Wales</strong> towards <strong>northern Queensland</strong> from January to June, before shifting southeast again. Sightings are busiest in <strong>January</strong>.`,
+
+          "Channel-billed Cuckoo":
+            `<span class="k-green"><strong>Channel-billed Cuckoo</strong></span> sightings shift northwest from <strong>northern New South Wales</strong> towards <strong>the Northern Territory</strong> from January to June, before shifting southeast again. Sightings are busiest in <strong>October</strong>.`,
+
+          "Budgerigar":
+            `<span class="k-green"><strong>Budgerigar</strong></span> sightings shift north and west across <strong>inland Australia</strong> from January to August, before shifting south and east towards <strong>South Australia</strong> from September to December. Sightings are busiest in <strong>August</strong>.`,
+
+          "Grey Fantail":
+            `<span class="k-green"><strong>Grey Fantail</strong></span> sightings shift north from <strong>southern inland Australia</strong> towards <strong>central New South Wales</strong> from January to June, before shifting south again. Sightings are busiest in <strong>April</strong>.`
+        }
+      },
+
+      bump_chart: {
+        always: [
+          {
+            left: "4%", top: "40px", w: "220x",
+            tail: { len: 14, x: 60 },
+            html: `<span class="k-green">Australian Magpie</span> ranks <strong>first every year</strong> from 2019 to 2025.`
+          }
+        ]
+      },
+
+      ranked_bar: {
+        always: [
+          {
+            left: "46%", top: "150px", w: "150px", hidden: true, html: "",
+            tail: { x: "0%", y: "50%", angle: 180, len: 40 }
+          },
+          {
+            left: "46%", top: "235px", w: "150px", hidden: true, html: "",
+            tail: { x: "0%", y: "50%", angle: 180, len: 40 }
+          }
+        ]
+      },
+
+      lollipop: {
+        always: [
+          {
+            left: "46%", top: "150px", w: "150px", hidden: true, html: "",
+            tail: { x: "0%", y: "50%", angle: 180, len: 40 }
+          },
+          {
+            left: "46%", top: "235px", w: "150px", hidden: true, html: "",
+            tail: { x: "0%", y: "50%", angle: 180, len: 40 }
+          }
+        ]
+      }
+    };
+
+    const CALLOUT_POSITIONS = {
+      "choropleth": {
+        "item:Total Sightings": {
+          "tailTarget": {
+            "x": "22.57",
+            "y": "40.46"
+          },
+          "left": "0.75%",
+          "top": "34px"
+        },
+        "item:Sightings Per Person": {
+          "left": "25.55%",
+          "top": "396.217px",
+          "tailTarget": {
+            "x": "64.05",
+            "y": "68.80"
+          }
+        }
+      },
+      "hotspot": {
+        "item:Rainbow Bee-eater": {
+          "tailTarget": {
+            "x": "38.03",
+            "y": "10.18"
+          },
+          "left": "0%",
+          "top": "33.3125px"
+        },
+        "item:Eastern Koel": {
+          "tailTarget": {
+            "x": "67.86",
+            "y": "64.74"
+          },
+          "left": "77.12%",
+          "top": "195.297px"
+        },
+        "item:Swift Parrot": {
+          "tailTarget": {
+            "x": "61.43",
+            "y": "84.75"
+          },
+          "left": "72.67%",
+          "top": "333.125px"
+        },
+        "item:Eastern Curlew": {
+          "tailTarget": {
+            "x": "72.20",
+            "y": "49.48"
+          },
+          "left": "77%",
+          "top": "264.75px"
+        },
+        "item:Dollarbird": {
+          "tailTarget": {
+            "x": "68.04",
+            "y": "66.15"
+          },
+          "left": "77.5%",
+          "top": "330.432px"
+        },
+        "item:Channel-billed Cuckoo": {
+          "tailTarget": {
+            "x": "68.23",
+            "y": "66.81"
+          },
+          "left": "77.5%",
+          "top": "320.057px"
+        },
+        "item:Budgerigar": {
+          "tailTarget": {
+            "x": "45.43",
+            "y": "39.55"
+          },
+          "left": "77.5%",
+          "top": "210.691px"
+        },
+        "item:Grey Fantail": {
+          "left": "75%",
+          "top": "260px",
+          "tailTarget": {
+            "x": "59.96",
+            "y": "74.01"
+          }
+        }
+      },
+      "elevation_map": {
+        "item:Rainbow Bee-eater": {
+          "tailTarget": {
+            "x": "19.14",
+            "y": "72.63"
+          },
+          "left": "0%",
+          "top": "340.049px"
+        },
+        "item:Channel-billed Cuckoo": {
+          "tailTarget": {
+            "x": "19.09",
+            "y": "73.77"
+          },
+          "left": "0%",
+          "top": "334.816px"
+        },
+        "item:Dollarbird": {
+          "tailTarget": {
+            "x": "18.90",
+            "y": "73.77"
+          },
+          "left": "0%",
+          "top": "342.973px"
+        },
+        "item:Eastern Curlew": {
+          "tailTarget": {
+            "x": "19.33",
+            "y": "69.40"
+          },
+          "left": "0%",
+          "top": "339.422px"
+        },
+        "item:Eastern Koel": {
+          "tailTarget": {
+            "x": "19.97",
+            "y": "67.17"
+          },
+          "left": "0%",
+          "top": "340.078px"
+        },
+        "item:Swift Parrot": {
+          "tailTarget": {
+            "x": "20.26",
+            "y": "71.16"
+          },
+          "left": "0%",
+          "top": "339.117px"
+        },
+        "item:Budgerigar": {
+          "tailTarget": {
+            "x": "18.32",
+            "y": "70.43"
+          },
+          "left": "0%",
+          "top": "343.254px"
+        },
+        "item:Grey Fantail": {
+          "left": "0%",
+          "top": "343.465px",
+          "tailTarget": {
+            "x": "21.04",
+            "y": "71.77"
+          }
+        }
+      },
+      "coast_map": {
+        "item:Rainbow Bee-eater": {
+          "tailTarget": {
+            "x": "16.01",
+            "y": "72.33"
+          },
+          "left": "0%",
+          "top": "341.707px"
+        },
+        "item:Eastern Koel": {
+          "tailTarget": {
+            "x": "16.99",
+            "y": "68.32"
+          },
+          "left": "0%",
+          "top": "338.145px"
+        },
+        "item:Swift Parrot": {
+          "tailTarget": {
+            "x": "16.39",
+            "y": "71.19"
+          },
+          "left": "0%",
+          "top": "339.844px"
+        },
+        "item:Eastern Curlew": {
+          "tailTarget": {
+            "x": "19.25",
+            "y": "76.85"
+          },
+          "left": "0%",
+          "top": "343.354px"
+        },
+        "item:Dollarbird": {
+          "tailTarget": {
+            "x": "17.98",
+            "y": "68.48"
+          },
+          "left": "0%",
+          "top": "340.729px"
+        },
+        "item:Channel-billed Cuckoo": {
+          "tailTarget": {
+            "x": "17.38",
+            "y": "77.52"
+          },
+          "left": "0%",
+          "top": "332.016px"
+        },
+        "item:Budgerigar": {
+          "tailTarget": {
+            "x": "19.68",
+            "y": "69.95"
+          },
+          "left": "0%",
+          "top": "340.096px"
+        },
+        "item:Grey Fantail": {
+          "left": "0%",
+          "top": "340px",
+          "tailTarget": {
+            "x": "18.08",
+            "y": "69.59"
+          }
+        }
+      },
+      "elevation_bands": {
+        "always:0": {
+          "left": "24.33%",
+          "top": "129px",
+          "tailTarget": {
+            "x": "27.41",
+            "y": "71.31"
+          }
+        }
+      },
+      "coast_range": {
+        "always:0": {
+          "left": "65%",
+          "top": "38px",
+          "tailTarget": {
+            "x": "27.10",
+            "y": "12.09"
+          }
+        },
+        "always:1": {
+          "left": "66.5%",
+          "top": "259px",
+          "tailTarget": {
+            "x": "81.66",
+            "y": "83.89"
+          }
+        }
+      },
+      "ridgeline": {
+        "always:0": {
+          "left": "26.04%",
+          "top": "535.846px",
+          "tailTarget": {
+            "x": "41.99",
+            "y": "83.06"
+          }
+        }
+      },
+      "heatmap": {
+        "item:Rainbow Bee-eater": {
+          "tailTarget": {
+            "x": "67.61",
+            "y": "90.26"
+          },
+          "left": "54.51%",
+          "top": "454.828px"
+        },
+        "item:Eastern Koel": {
+          "tailTarget": {
+            "x": "68.33",
+            "y": "87.66"
+          },
+          "left": "54.82%",
+          "top": "457.137px"
+        },
+        "item:Swift Parrot": {
+          "tailTarget": {
+            "x": "67.73",
+            "y": "89.76"
+          },
+          "left": "54.71%",
+          "top": "459.445px"
+        },
+        "item:Eastern Curlew": {
+          "tailTarget": {
+            "x": "68.37",
+            "y": "92.17"
+          },
+          "left": "54.25%",
+          "top": "451px"
+        },
+        "item:Dollarbird": {
+          "tailTarget": {
+            "x": "66.46",
+            "y": "86.63"
+          },
+          "left": "54.53%",
+          "top": "452.59px"
+        },
+        "item:Channel-billed Cuckoo": {
+          "tailTarget": {
+            "x": "67.75",
+            "y": "92.81"
+          },
+          "left": "54.52%",
+          "top": "452.76px"
+        },
+        "item:Budgerigar": {
+          "tailTarget": {
+            "x": "69.38",
+            "y": "90.14"
+          },
+          "left": "54.27%",
+          "top": "450.135px"
+        },
+        "item:Grey Fantail": {
+          "left": "54.44%",
+          "top": "443.174px",
+          "tailTarget": {
+            "x": "69.08",
+            "y": "93.53"
+          }
+        }
+      },
+      "line_chart": {
+        "always:0": {
+          "left": "35%",
+          "top": "365.262px",
+          "tailTarget": {
+            "x": "80.00",
+            "y": "58.15"
+          }
+        }
+      },
+      "path1": {
+        "item:Rainbow Bee-eater": {
+          "left": "6.63%",
+          "top": "200px",
+          "tailTarget": {
+            "x": "48.86",
+            "y": "70.08"
+          }
+        },
+        "item:Eastern Koel": {
+          "tailTarget": {
+            "x": "43.23",
+            "y": "74.18"
+          },
+          "left": "61.17%",
+          "top": "343.682px"
+        },
+        "item:Swift Parrot": {
+          "tailTarget": {
+            "x": "53.20",
+            "y": "31.67"
+          },
+          "left": "62.5%",
+          "top": "255.58px"
+        },
+        "item:Eastern Curlew": {
+          "tailTarget": {
+            "x": "54.91",
+            "y": "70.70"
+          },
+          "left": "56.03%",
+          "top": "166.676px"
+        },
+        "item:Dollarbird": {
+          "tailTarget": {
+            "x": "58.00",
+            "y": "82.44"
+          },
+          "left": "62.5%",
+          "top": "105.873px"
+        },
+        "item:Channel-billed Cuckoo": {
+          "tailTarget": {
+            "x": "57.17",
+            "y": "83.13"
+          },
+          "left": "57.11%",
+          "top": "113.619px"
+        },
+        "item:Budgerigar": {
+          "tailTarget": {
+            "x": "43.65",
+            "y": "40.69"
+          },
+          "left": "55.98%",
+          "top": "105.164px"
+        },
+        "item:Grey Fantail": {
+          "tailTarget": {
+            "x": "56.64",
+            "y": "62.61"
+          },
+          "left": "17.44%",
+          "top": "130.717px"
+        }
+      },
+      "bump_chart": {
+        "always:0": {
+          "left": "7.58%",
+          "top": "32.0449px",
+          "tailTarget": {
+            "x": "10.72",
+            "y": "17.06"
+          }
+        }
+      },
+      "ranked_bar": {
+        "always:0": {
+          "left": "75%",
+          "top": "55.2656px",
+          "tailTarget": {
+            "x": "63.36",
+            "y": "11.58"
+          }
+        },
+        "always:1": {
+          "left": "46%",
+          "top": "235px",
+          "tailTarget": {
+            "x": "39.33",
+            "y": "50.09"
+          }
+        }
+      },
+      "lollipop": {
+        "always:0": {
+          "left": "75%",
+          "top": "71.1615px",
+          "tailTarget": {
+            "x": "68.04",
+            "y": "11.60"
+          }
+        },
+        "always:1": {
+          "left": "75%",
+          "top": "197.68px",
+          "tailTarget": {
+            "x": "56.50",
+            "y": "29.58"
+          }
+        }
+      }
+    };
+
+    // ---------- Setup ----------
+
+    const embedOptions = {
+      actions: false,
+      renderer: "canvas",
+      loader: { baseURL: "js/" }
+    };
+
+    const chartViews = {};
+    let pathSpec;
+    let currentMigrationBird = "Rainbow Bee-eater";
+    let topSpecies = [];
+
+    const monthSlider = document.getElementById("shared-month");
+    const monthName = document.getElementById("shared-month-name");
+
+    const formatCount = n => Math.round(n).toLocaleString("en-AU");
+
+    const formatPct = value =>
+      `${value >= 0 ? "+" : ""}${(Math.trunc(value * 10) / 10).toFixed(1)}%`;
+
+    // ---------- Callouts ----------
+
+    function ensureWrap(el) {
+      if (el.parentElement.classList.contains("vis-wrap")) {
+        return el.parentElement;
+      }
+
+      const wrap = document.createElement("div");
+      wrap.className = "vis-wrap";
+      el.parentNode.insertBefore(wrap, el);
+      wrap.appendChild(el);
+
+      return wrap;
     }
 
-    // specs read data from "../data/...", so tell vega that paths start from the js/ folder.
-    var options = { actions: false, loader: { baseURL: "js/" } };
+    function addCallout(wrap, chartId, o, when, key) {
+      const tail = { len: 45, x: "50%", y: "100%", angle: 90, ...o.tail };
+      const el = document.createElement("div");
 
-    // embedding visualisations
-    document.fonts.ready.then(function () {
+      el.className = "callout";
+      el.setAttribute("role", "note");
+      el.dataset.chart = chartId;
+      el.dataset.calloutKey = key;
+      el.style.left = o.left;
+      el.style.top = o.top;
+      if (o.w) el.style.setProperty("--w", o.w);
 
-      // choropleth
-      vegaEmbed("#choropleth", charts.choropleth, options)
-        .catch(console.error);
+      el.dataset.tailX = tail.x;
+      el.dataset.tailY = tail.y;
+      el.dataset.tailLen = tail.len;
+      el.dataset.tailAngle = tail.angle;
 
-      // proportional symbol
-      vegaEmbed("#hotspot", charts.hotspot, options)
-        .then(function (result) {
+      const saved = CALLOUT_POSITIONS[chartId]?.[key]?.tailTarget;
 
-          // default bird
-          updateBirdProfile("Rainbow Bee-eater");
+      if (saved) {
+        el.dataset.targetX = saved.x;
+        el.dataset.targetY = saved.y;
+      }
 
-          // update profile when dropdown changes
-          result.view.addSignalListener("selectedBird", function (name, value) {
-            updateBirdProfile(value);
-          });
-        })
-        .catch(console.error);
+      if (when !== undefined) el.dataset.when = when;
+      el.hidden = when !== undefined || Boolean(o.hidden);
+      el.innerHTML = o.html;
 
-      // ridgeline
-      vegaEmbed("#ridgeline", charts.ridgeline, options)
-        .catch(console.error);
-      
-      vegaEmbed("#heatmap", charts.heatmap, options)
-        .catch(console.error);
+      wrap.appendChild(el);
+    }
 
-      vegaEmbed("#path", charts.path, options)
-        .catch(console.error);
+    function redrawCalloutLines(wrap) {
+      if (!wrap || !wrap.clientWidth || !wrap.clientHeight) return;
 
-      vegaEmbed("#bump_chart", charts.bump_chart, options)
-        .catch(console.error);
+      const ns = "http://www.w3.org/2000/svg";
+      const width = wrap.clientWidth;
+      const height = wrap.clientHeight;
 
+      let svg = wrap.querySelector(".callout-lines");
+
+      if (!svg) {
+        svg = document.createElementNS(ns, "svg");
+        svg.classList.add("callout-lines");
+        svg.setAttribute("aria-hidden", "true");
+        wrap.prepend(svg);
+      }
+
+      svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      svg.replaceChildren();
+
+      const toPx = (raw, start, size) =>
+        raw.endsWith("%")
+          ? start + parseFloat(raw) / 100 * size
+          : start + parseFloat(raw);
+
+      wrap.querySelectorAll(".callout").forEach(el => {
+        if (el.hidden) return;
+
+        const anchorX = toPx(el.dataset.tailX, el.offsetLeft, el.offsetWidth);
+        const anchorY = toPx(el.dataset.tailY, el.offsetTop, el.offsetHeight);
+
+        if (el.dataset.targetX === undefined || el.dataset.targetY === undefined) {
+          const angle = Number(el.dataset.tailAngle) * Math.PI / 180;
+          const len = Number(el.dataset.tailLen);
+
+          el.dataset.targetX = (anchorX + len * Math.cos(angle)) / width * 100;
+          el.dataset.targetY = (anchorY + len * Math.sin(angle)) / height * 100;
+        }
+
+        const line = document.createElementNS(ns, "line");
+        line.setAttribute("class", "callout-leader");
+        line.setAttribute("x1", anchorX);
+        line.setAttribute("y1", anchorY);
+        line.setAttribute("x2", Number(el.dataset.targetX) / 100 * width);
+        line.setAttribute("y2", Number(el.dataset.targetY) / 100 * height);
+        svg.appendChild(line);
+      });
+    }
+
+    function redrawAllCalloutLines() {
+      document.querySelectorAll(".vis-wrap").forEach(redrawCalloutLines);
+    }
+
+    window.addEventListener("resize", redrawAllCalloutLines);
+
+    function buildCallouts() {
+      const withSavedPosition = (chartId, key, original) =>
+        ({ ...original, ...CALLOUT_POSITIONS[chartId]?.[key] });
+
+      Object.entries(CALLOUTS).forEach(([chartId, cfg]) => {
+        const target = document.getElementById(chartId);
+        if (!target) return;
+
+        const wrap = ensureWrap(target);
+
+        (cfg.always || []).forEach((original, index) => {
+          const key = `always:${index}`;
+          addCallout(wrap, chartId, withSavedPosition(chartId, key, original), undefined, key);
+        });
+
+        Object.entries(cfg.items || {}).forEach(([when, original]) => {
+          const item = typeof original === "string" ? { html: original } : original;
+          const key = `item:${when}`;
+          const positioned = withSavedPosition(chartId, key, { ...cfg.pos, ...item });
+
+          addCallout(wrap, chartId, positioned, when, key);
+        });
+      });
+    }
+
+    function showCallouts(chartId, value) {
+      document
+        .querySelectorAll(`.callout[data-chart="${chartId}"][data-when]`)
+        .forEach(note => {
+          note.hidden = note.dataset.when !== String(value);
+        });
+
+      const target = document.getElementById(chartId);
+      if (target) redrawCalloutLines(target.parentElement);
+    }
+
+    function bindCallouts(chartId) {
+      const { signal } = CALLOUTS[chartId];
+      const view = chartViews[chartId];
+      if (!signal || !view) return;
+
+      showCallouts(chartId, view.signal(signal));
+      view.addSignalListener(signal, (name, value) => showCallouts(chartId, value));
+    }
+
+    function setCallout(chartId, key, html) {
+      const el = document.querySelector(
+        `.callout[data-chart="${chartId}"][data-callout-key="${key}"]`
+      );
+      if (!el) return;
+
+      el.innerHTML = html;
+      el.hidden = false;
+      redrawCalloutLines(el.parentElement);
+    }
+
+    // ---------- Charts ----------
+
+    async function loadChart(id) {
+      try {
+        const response = await fetch(embedOptions.loader.baseURL + id + ".json");
+        if (!response.ok) throw new Error("HTTP " + response.status);
+
+        const spec = await response.json();
+        const result = await vegaEmbed("#" + id, spec, embedOptions);
+
+        chartViews[id] = result.view;
+      } catch (error) {
+        console.error("Failed to load chart " + id + ":", error);
+      }
+    }
+
+    async function renderMigrationMap(bird = currentMigrationBird) {
+      if (!birds[bird] || !pathSpec) return;
+
+      const id = "path1";
+      const { center, scale, focus } = birds[bird];
+
+      currentMigrationBird = bird;
+      showCallouts(id, bird);
+
+      if (chartViews[id]) {
+        chartViews[id].finalize();
+        delete chartViews[id];
+      }
+
+      const spec = structuredClone(pathSpec);
+
+      spec.width = "container";
+      spec.height = MIGRATION_MAP_HEIGHT;
+      spec.autosize = { type: "fit", contains: "padding" };
+      spec.projection = {
+        ...spec.projection,
+        type: "equirectangular",
+        center,
+        scale: scale * MIGRATION_MAP_ZOOM,
+        translate: { expr: "[width / 2, height / 2]" }
+      };
+
+      spec.params = (spec.params || []).map(param => {
+        if (param.name === "selectedBird") return { ...param, value: bird };
+        if (param.name === "selected_month") return { ...param, value: Number(monthSlider.value) };
+        return param;
       });
 
-    
+      document.getElementById("migration-bird-title").textContent = bird;
+      document.getElementById("migration-focus-description").textContent =
+        "Regional focus: " + focus + ".";
+      document.getElementById("path-description-1").textContent =
+        birdDescriptions[bird] ||
+        "Explore how the locations of recorded sightings change throughout the year.";
 
+      try {
+        const { view } = await vegaEmbed("#" + id, spec, embedOptions);
+
+        chartViews[id] = view;
+        redrawCalloutLines(document.getElementById(id).parentElement);
+
+        view.addSignalListener("selectedBird", (name, newBird) => {
+          if (birds[newBird] && newBird !== currentMigrationBird) {
+            renderMigrationMap(newBird);
+          }
+        });
+      } catch (error) {
+        console.error("Failed to render migration map:", error);
+      }
+    }
+
+    async function setSharedMonth(month) {
+      monthName.textContent = monthNames[month - 1];
+
+      const view = chartViews["path1"];
+      if (!view) return;
+
+      view.signal("selected_month", month);
+      await view.runAsync();
+    }
+
+    monthSlider.addEventListener("input", () => {
+      setSharedMonth(Number(monthSlider.value));
+    });
+
+    // One dropdown drives the same signal in other charts.
+    function linkBirdSelection(sourceId, targetIds) {
+      const source = chartViews[sourceId];
+      if (!source) return;
+
+      const push = bird =>
+        targetIds.forEach(id => chartViews[id]?.signal("selectedBird", bird).run());
+
+      push(source.signal("selectedBird"));
+      source.addSignalListener("selectedBird", (name, bird) => push(bird));
+    }
+
+    // ---------- Descriptions ----------
+
+    function bindChoroplethScaleDescription() {
+      const view = chartViews["choropleth"];
+      const logDescription = document.getElementById("log-description");
+      const thresholdDescription = document.getElementById("threshold-description");
+
+      if (!view || !logDescription || !thresholdDescription) return;
+
+      function update(measure) {
+        const totalSelected = measure === "Total Sightings";
+        logDescription.hidden = !totalSelected;
+        thresholdDescription.hidden = totalSelected;
+      }
+
+      update(view.signal("chosen"));
+      view.addSignalListener("chosen", (name, measure) => update(measure));
+    }
+
+    function bindDynamicDescription(chartId, signalName, descriptionId, descriptions, fallback, onChange) {
+      const view = chartViews[chartId];
+      const element = document.getElementById(descriptionId);
+
+      if (!view || !element) return;
+
+      function update(value) {
+        element.textContent = descriptions[value] || fallback;
+        if (onChange) onChange(value);
+      }
+
+      update(view.signal(signalName));
+      view.addSignalListener(signalName, (name, value) => update(value));
+    }
+
+    // ---------- Data-driven callouts (ranked bars and change chart) ----------
+
+    async function loadTopSpecies() {
+      const response = await fetch("data/top_species_by_year.csv");
+      if (!response.ok) throw new Error("Could not load top_species_by_year.csv");
+
+      topSpecies = vega.read(await response.text(), { type: "csv", parse: "auto" });
+    }
+
+    function updateRankedBarCallouts() {
+      const view = chartViews["ranked_bar"];
+      if (!view || !topSpecies.length) return;
+
+      const year = Number(view.signal("selectedYear"));
+
+      const rows = topSpecies
+        .filter(d => Number(d.year) === year)
+        .sort((a, b) => b.count - a.count);
+
+      if (rows.length < 2) return;
+
+      const first = rows[0];
+      const last = rows[rows.length - 1];
+      const times = (first.count / last.count).toFixed(1);
+
+      setCallout(
+        "ranked_bar",
+        "always:0",
+        `<span class="k-green">${first.species}</span> leads in ${year} with <strong>${formatCount(first.count)}</strong> sightings, <strong>${times}×</strong> as many as ${last.species} (ranked 10th).`
+      );
+    }
+
+    function updateChangeCallouts() {
+      const view = chartViews["lollipop"];
+      if (!view || !topSpecies.length) return;
+
+      const start = 2019;
+      const end = 2025;
+
+      const countIn = (name, year) =>
+        topSpecies.find(d => d.species === name && Number(d.year) === year)?.count;
+
+      const rows = [...new Set(topSpecies.map(d => d.species))]
+        .map(name => {
+          const a = countIn(name, start);
+          const b = countIn(name, end);
+
+          return a != null && b != null && a > 0
+            ? { name, a, b, pct: (b / a - 1) * 100 }
+            : null;
+        })
+        .filter(Boolean);
+
+      if (rows.length < 2) return;
+
+      rows.sort((x, y) => y.pct - x.pct);
+
+      const top = rows[0];
+      const bottom = rows[rows.length - 1];
+      const biggestGain = [...rows].sort((x, y) => (y.b - y.a) - (x.b - x.a))[0];
+
+      setCallout(
+        "lollipop",
+        "always:0",
+        `<span class="k-green">${top.name}</span> had the ${top.pct >= 0 ? "largest percentage increase" : "smallest percentage decline"}, at <strong>${formatPct(top.pct)}</strong> from ${start} to ${end}.`
+      );
+
+      if (biggestGain.name !== top.name && biggestGain.b > biggestGain.a) {
+        setCallout(
+          "lollipop",
+          "always:1",
+          `<span class="k-green">${biggestGain.name}</span> recorded the largest increase in raw sightings, adding <strong>${formatCount(biggestGain.b - biggestGain.a)}</strong> (<strong>${formatPct(biggestGain.pct)}</strong>).`
+        );
+      } else {
+        setCallout(
+          "lollipop",
+          "always:1",
+          `<span class="k-green">${bottom.name}</span> had the ${bottom.pct < 0 ? "largest percentage decline" : "smallest percentage increase"}, at <strong>${formatPct(bottom.pct)}</strong> from ${start} to ${end}.`
+        );
+      }
+    }
+
+    function bindDataCallouts() {
+      chartViews["ranked_bar"]?.addSignalListener("selectedYear", updateRankedBarCallouts);
+
+      updateRankedBarCallouts();
+      updateChangeCallouts();
+    }
+
+    // ---------- Start-up ----------
+
+    document.fonts.ready.then(async () => {
+      buildCallouts();
+
+      const response = await fetch("js/path.json");
+      if (!response.ok) throw new Error("Could not load path.json: " + response.status);
+      pathSpec = await response.json();
+
+      await Promise.all([
+        ...standardCharts.map(loadChart),
+        renderMigrationMap("Rainbow Bee-eater")
+      ]);
+
+      redrawAllCalloutLines();
+      linkBirdSelection("bump_chart", ["ranked_bar", "lollipop"]);
+
+      try {
+        await loadTopSpecies();
+        bindDataCallouts();
+      } catch (error) {
+        console.warn("Data-driven callouts unavailable:", error);
+      }
+
+      Object.keys(CALLOUTS).forEach(bindCallouts);
+      bindChoroplethScaleDescription();
+
+      bindDynamicDescription(
+        "choropleth", "chosen", "choropleth-description", choroplethDescriptions,
+        "Select a measure to explore recorded bird sightings."
+      );
+
+      bindDynamicDescription(
+        "hotspot", "selectedBird", "hotspot-description", hotspotDescriptions,
+        "Select a bird to explore its three busiest reporting locations.",
+        bird => {
+          document.getElementById("hotspot-ranking-title").textContent =
+            `Top 3 Hotspots for the ${bird}`;
+        }
+      );
+
+      bindDynamicDescription(
+        "heatmap", "selectedBird", "heatmap-description", heatmapDescriptions,
+        "Select a bird to explore its seasonal sighting patterns."
+      );
+    }).catch(error => {
+      console.error("Dashboard initialisation failed:", error);
+    });
   </script>
-
 </body>
 
 </html>
