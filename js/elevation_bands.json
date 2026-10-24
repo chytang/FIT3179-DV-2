@@ -1,0 +1,60 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Elevation Distribution of Bird Sightings, 2019-2025",
+    "anchor": "middle",
+    "offset": 12
+  },
+  "width": "container",
+  "height": 500,
+  "padding": {"left": 5, "right": 15, "top": 5, "bottom": 5},
+  "autosize": {"type": "fit", "contains": "padding"},
+  "data": {"url": "../data/habitat_points.csv"},
+  "transform": [
+    {"calculate": "datum.elev_m < 100 ? '0 to 100 m' : datum.elev_m < 250 ? '100 to 250 m' : datum.elev_m < 500 ? '250 to 500 m' : datum.elev_m < 750 ? '500 to 750 m' : datum.elev_m < 1000 ? '750 to 1,000 m' : 'Over 1,000 m'", "as": "band"},
+    {"calculate": "datum.elev_m < 100 ? 0 : datum.elev_m < 250 ? 1 : datum.elev_m < 500 ? 2 : datum.elev_m < 750 ? 3 : datum.elev_m < 1000 ? 4 : 5", "as": "bandIdx"},
+    {"joinaggregate": [{"op": "median", "field": "elev_m", "as": "medElev"}], "groupby": ["species"]},
+    {"aggregate": [{"op": "count", "as": "n"}], "groupby": ["species", "band", "bandIdx", "medElev"]},
+    {"joinaggregate": [{"op": "sum", "field": "n", "as": "total"}], "groupby": ["species"]},
+    {"calculate": "datum.n / datum.total", "as": "share"}
+  ],
+  "mark": {"type": "bar", "stroke": "#FFFFE0", "strokeWidth": 1},
+  "encoding": {
+    "y": {
+      "field": "species",
+      "type": "nominal",
+      "sort": {"field": "medElev", "op": "min", "order": "ascending"},
+      "axis": {"title": null}
+    },
+    "x": {
+      "field": "share",
+      "type": "quantitative",
+      "stack": "zero",
+      "axis": {"title": "Share of sampled sightings", "format": "%", "grid": false}
+    },
+    "color": {
+      "field": "band",
+      "type": "nominal",
+      "scale": {
+        "domain": ["0 to 100 m", "100 to 250 m", "250 to 500 m", "500 to 750 m", "750 to 1,000 m", "Over 1,000 m"],
+        "range": ["#cfe3b4", "#e9eda9", "#e8d28f", "#cf9f62", "#a46f45", "#744a33"]
+      },
+      "legend": {"title": "Elevation", "orient": "bottom", "columns": 3, "symbolType": "square"}
+    },
+    "order": {"field": "bandIdx", "type": "quantitative"},
+    "tooltip": [
+      {"field": "species", "type": "nominal", "title": "Bird"},
+      {"field": "band", "type": "nominal", "title": "Elevation"},
+      {"field": "share", "type": "quantitative", "title": "Share of sightings", "format": ".0%"},
+      {"field": "medElev", "type": "quantitative", "title": "Median elevation (m)", "format": ",.0f"}
+    ]
+  },
+  "config": {
+    "background": "#FFFFE0",
+    "font": "Open Sans",
+    "view": {"stroke": null},
+    "title": {"font": "Inter", "fontSize": 18, "fontWeight": 600, "color": "black", "subtitleFont": "Open Sans", "subtitleFontSize": 12, "subtitleColor": "#303632"},
+    "axis": {"grid": false, "ticks": false, "domain": false, "labelFont": "Open Sans", "labelFontSize": 11, "labelColor": "#303632", "labelPadding": 6, "titleFont": "Open Sans", "titleFontSize": 12, "titleFontWeight": 600, "titleColor": "black"},
+    "legend": {"labelFont": "Open Sans", "labelFontSize": 11, "labelColor": "#303632", "titleFont": "Open Sans", "titleFontSize": 12, "titleFontWeight": 600, "titleColor": "black"}
+  }
+}

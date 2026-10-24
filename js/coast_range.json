@@ -1,0 +1,72 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Median Distance from the Coast by Bird, 2019-2025",
+    "anchor": "middle",
+    "offset": 12
+  },
+  "width": "container",
+  "height": 500,
+  "padding": {"left": 5, "right": 10, "top": 5, "bottom": 5},
+  "autosize": {"type": "fit", "contains": "padding"},
+  "data": {"url": "../data/habitat_points.csv"},
+  "transform": [
+    {
+      "aggregate": [
+        {"op": "q1", "field": "coast_km", "as": "q1"},
+        {"op": "median", "field": "coast_km", "as": "med"},
+        {"op": "q3", "field": "coast_km", "as": "q3"}
+      ],
+      "groupby": ["species"]
+    },
+    {"calculate": "format(datum.med, ',.0f') + ' km'", "as": "label"}
+  ],
+  "encoding": {
+    "y": {
+      "field": "species",
+      "type": "nominal",
+      "sort": {"field": "med", "op": "min", "order": "ascending"},
+      "axis": {"title": null}
+    },
+    "x": {
+      "type": "quantitative",
+      "scale": {"type": "sqrt", "zero": true},
+      "axis": {
+        "title": "Distance from the coast (km, square-root scale)",
+        "values": [0, 10, 50, 100, 200, 400, 600, 800],
+        "labelExpr": "format(datum.value, ',.0f')",
+        "grid": true,
+        "gridColor": {"condition": {"test": "datum.value == 0 || datum.value == 800", "value": "transparent"}, "value": "#e5e3c9"},
+        "gridOpacity": 0.7
+      }
+    },
+    "tooltip": [
+      {"field": "species", "type": "nominal", "title": "Bird"},
+      {"field": "q1", "type": "quantitative", "title": "25th percentile (km)", "format": ",.0f"},
+      {"field": "med", "type": "quantitative", "title": "Median (km)", "format": ",.0f"},
+      {"field": "q3", "type": "quantitative", "title": "75th percentile (km)", "format": ",.0f"}
+    ]
+  },
+  "layer": [
+    {
+      "mark": {"type": "rule", "strokeWidth": 8, "strokeCap": "round", "color": "#253D32", "opacity": 0.3},
+      "encoding": {"x": {"field": "q1"}, "x2": {"field": "q3"}}
+    },
+    {
+      "mark": {"type": "circle", "size": 140, "color": "#253D32", "opacity": 1},
+      "encoding": {"x": {"field": "med"}}
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 11, "color": "#303632"},
+      "encoding": {"x": {"field": "q3"}, "text": {"field": "label"}}
+    }
+  ],
+  "config": {
+    "background": "#FFFFE0",
+    "font": "Open Sans",
+    "view": {"stroke": null},
+    "title": {"font": "Inter", "fontSize": 18, "fontWeight": 600, "color": "black", "subtitleFont": "Open Sans", "subtitleFontSize": 12, "subtitleColor": "#303632"},
+    "axis": {"grid": false, "ticks": false, "domain": false, "labelFont": "Open Sans", "labelFontSize": 11, "labelColor": "#303632", "labelPadding": 6, "titleFont": "Open Sans", "titleFontSize": 12, "titleFontWeight": 600, "titleColor": "black"},
+    "legend": {"labelFont": "Open Sans", "labelFontSize": 11, "labelColor": "#303632", "titleFont": "Open Sans", "titleFontSize": 12, "titleFontWeight": 600, "titleColor": "black"}
+  }
+}

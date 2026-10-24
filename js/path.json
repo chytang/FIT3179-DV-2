@@ -1,13 +1,11 @@
-
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": {
-      "expr": "'The ' + selectedBird + \"'s Journey Through the Year\""
+      "expr": "'Monthly Average Locations of ' + selectedBird + \"'s Sightings\""
     },
-    "subtitle": ["Monthly average locations of recorded sightings"],
     "anchor": "middle",
-    "offset": 12
+    "offset": 10
   },
   "params": [
     {
@@ -23,91 +21,44 @@
           "Dollarbird",
           "Channel-billed Cuckoo",
           "Budgerigar",
-          "Australian Magpie"
+          "Grey Fantail"
         ],
         "name": "Select a bird: "
       }
     },
     {
-      "name": "selected_month",
-      "value": 1,
-      "bind": {
-        "input": "range",
-        "min": 1,
-        "max": 12,
-        "step": 1,
-        "name": "Month: "
-      }
-    },
-    {
-      "name": "zoom_level",
-      "value": 800,
-      "bind": {
-        "input": "range",
-        "min": 800,
-        "max": 2500,
-        "step": 50,
-        "name": "Zoom: "
-      }
-    },
-    {
-      "name": "center_to",
-      "value": [134, -27],
-      "bind": {
-        "input": "select",
-        "options": [
-            [134, -27],
-            [151, -27],
-            [145.5, -36.5],
-            [146.5, -19],
-            [134, -25],
-            [121, -25],
-            [144.5, -42],
-            [135, -31],
-            [133, -19]
-        ],
-        "labels": [
-            "Australia",
-            "New South Wales",
-            "Victoria",
-            "Queensland",
-            "South Australia",
-            "Western Australia",
-            "Tasmania",
-            "Australian Capital Territory",
-            "Northern Territory"
-        ],
-        "name": "Map Centre: "
-      }
+      "name": "selectedMonth",
+      "value": 1
     }
   ],
   "width": "container",
-  "height": 500,
+  "height": 260,
+  "autosize": {"type": "fit", "contains": "padding"},
   "projection": {
     "type": "equirectangular",
-    "center": {"expr": "center_to"},
-    "scale": {"expr": "zoom_level"}
+    "center": [145, -20],
+    "scale": 1200
   },
   "layer": [
     {
       "data": {
         "url": "../data/aus_states.topojson",
-        "format": {
-          "type": "topojson",
-          "feature": "states"
-        }
+        "format": {"type": "topojson", "feature": "states"}
       },
       "mark": {
         "type": "geoshape",
-        "fill": "floralwhite",
+        "fill": "#FFFDF0",
         "stroke": "darkgrey",
-        "strokeWidth": 0.8
+        "strokeWidth": 0.5
       }
     },
     {
       "data": {"url": "../data/centroids.csv"},
       "transform": [
-        {"filter": "datum.species == selectedBird"},
+        {"filter": "datum.species === selectedBird"},
+        {"calculate": "toNumber(datum.lon)", "as": "lon"},
+        {"calculate": "toNumber(datum.lat)", "as": "lat"},
+        {"calculate": "toNumber(datum.month)", "as": "month"},
         {
           "calculate": "timeFormat(datetime(2000, datum.month - 1, 1), '%b')",
           "as": "monthName"
@@ -115,11 +66,12 @@
       ],
       "layer": [
         {
+          "description": "Path joining the monthly locations",
           "mark": {
             "type": "line",
-            "strokeWidth": 5,
-            "color": "darkslategrey",
-            "opacity": 0.6
+            "strokeWidth": 2.5,
+            "color": "#253D32",
+            "opacity": 0.9
           },
           "encoding": {
             "latitude": {"field": "lat", "type": "quantitative"},
@@ -128,17 +80,52 @@
           }
         },
         {
+          "description": "Direction arrows at the midpoint of each month-to-month segment",
+          "transform": [
+            {
+              "window": [
+                {"op": "lead", "field": "lon", "as": "nextLon"},
+                {"op": "lead", "field": "lat", "as": "nextLat"}
+              ],
+              "sort": [{"field": "month", "order": "ascending"}]
+            },
+            {"filter": "isValid(datum.nextLon) && isValid(datum.nextLat)"},
+            {"calculate": "datum.nextLon - datum.lon", "as": "deltaLon"},
+            {"calculate": "datum.nextLat - datum.lat", "as": "deltaLat"},
+            {
+              "calculate": "atan2(-datum.deltaLat, datum.deltaLon) * 180 / PI + 90",
+              "as": "angle"
+            },
+            {"calculate": "(datum.lon + datum.nextLon) / 2", "as": "midLon"},
+            {"calculate": "(datum.lat + datum.nextLat) / 2", "as": "midLat"}
+          ],
           "mark": {
-            "type": "circle",
-            "size": 150,
+            "type": "point",
+            "shape": "triangle",
             "filled": true,
-            "fill": "darkslategrey",
-            "opacity": 0.7,
-            "stroke": null
+            "size": 80,
+            "color": "#253D32"
           },
+          "encoding": {
+            "longitude": {"field": "midLon", "type": "quantitative"},
+            "latitude": {"field": "midLat", "type": "quantitative"},
+            "angle": {"field": "angle", "type": "quantitative", "scale": null}
+          }
+        },
+        {
+          "description": "Monthly location markers (selected month highlighted)",
+          "mark": {"type": "circle", "size": 140, "filled": true},
           "encoding": {
             "latitude": {"field": "lat", "type": "quantitative"},
             "longitude": {"field": "lon", "type": "quantitative"},
+            "color": {
+              "condition": {
+                "test": "datum.month == selectedMonth",
+                "value": "#B7410E"
+              },
+              "value": "#888888"
+            },
+            "opacity": {"value": 0.85},
             "tooltip": [
               {"field": "species", "type": "nominal", "title": "Bird"},
               {"field": "monthName", "type": "nominal", "title": "Month"},
@@ -152,52 +139,62 @@
                 "field": "lat",
                 "type": "quantitative",
                 "title": "Latitude",
-                "format": ".3f"
+                "format": ".2f"
               },
               {
                 "field": "lon",
                 "type": "quantitative",
                 "title": "Longitude",
-                "format": ".3f"
+                "format": ".2f"
               }
             ]
           }
         },
         {
-          "transform": [
-            {"filter": "datum.month == selected_month"}
-          ],
+          "description": "Outlined marker for the selected month",
+          "transform": [{"filter": "datum.month === selectedMonth"}],
           "mark": {
             "type": "circle",
-            "size": 150,
-            "fill": "orangered",
-            "opacity": 0.8,
-            "stroke": "orangered",
-            "strokeWidth": 3
-          },
-          "encoding": {
-            "latitude": {"field": "lat", "type": "quantitative"},
-            "longitude": {"field": "lon", "type": "quantitative"}
-          }
-        },
-        {
-          "mark": {
-            "type": "text",
-            "dy": -13,
-            "fontSize": 14,
-            "fontWeight": "bold"
+            "size": 140,
+            "filled": true,
+            "stroke": "#B7410E",
+            "strokeWidth": 2.5,
+            "color": "#E76F35",
+            "opacity": 1
           },
           "encoding": {
             "latitude": {"field": "lat", "type": "quantitative"},
             "longitude": {"field": "lon", "type": "quantitative"},
-            "text": {"field": "monthName", "type": "nominal"},
-            "color": {
-              "condition": {
-                "test": "datum.month == selected_month",
-                "value": "orangered"
-              },
-              "value": "#253D32"
-            }
+            "tooltip": [
+              {"field": "species", "type": "nominal", "title": "Bird"},
+              {"field": "monthName", "type": "nominal", "title": "Selected month"},
+              {
+                "field": "n",
+                "type": "quantitative",
+                "title": "Recorded sightings",
+                "format": ","
+              }
+            ]
+          }
+        },
+        {
+          "description": "Label for the selected month",
+          "transform": [{"filter": "datum.month === selectedMonth"}],
+          "mark": {
+            "type": "text",
+            "dx": 15,
+            "dy": -10,
+            "align": "center",
+            "baseline": "bottom",
+            "font": "Open Sans",
+            "fontSize": 12,
+            "fontWeight": "bold",
+            "color": "#B7410E"
+          },
+          "encoding": {
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "text": {"field": "monthName", "type": "nominal"}
           }
         }
       ]
@@ -208,21 +205,21 @@
     "font": "Open Sans",
     "view": {"stroke": null},
     "title": {
-      "font": "Open Sans",
+      "font": "Inter",
       "fontSize": 18,
-      "fontWeight": 700,
-      "color": "black",
-      "subtitleFont": "Open Sans",
-      "subtitleFontSize": 12,
-      "subtitleColor": "#303632"
+      "fontWeight": 600
+    },
+    "axis": {
+      "labelFont": "Open Sans",
+      "titleFont": "Open Sans"
     },
     "legend": {
       "titleFont": "Open Sans",
       "labelFont": "Open Sans",
-      "titleFontSize": 12,
-      "labelFontSize": 11,
-      "titleColor": "black",
-      "labelColor": "black"
+      "titleFontSize": 11,
+      "labelFontSize": 10,
+      "titleColor": "#253D32",
+      "labelColor": "#303632"
     }
   }
 }

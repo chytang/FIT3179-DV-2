@@ -1,111 +1,233 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": {
-        "text": "Monthly Pattern of Bird Sightings",
-        "subtitle": [
-            "Higher peaks indicate months with greater proportion of annual sightings.",
-            "Label marks the peak month with the highest share."
-        ]
+        "text": "Monthly Pattern of Bird Sightings, 2019-2025"
     },
-    "data": {"url": "../data/species_year_month.csv"},
+    "data": {
+        "url": "../data/species_year_month.csv"
+    },
     "transform": [
-        {"filter": "datum.species != 'Australian Magpie'"},
-        {"aggregate": [{"op": "sum", "field": "count", "as": "count"}], "groupby": ["species", "month"]},
-        {"joinaggregate": [{"op": "sum", "field": "count", "as": "total"}], "groupby": ["species"]},
-        {"calculate": "datum.count / datum.total", "as": "share"},
-        {"joinaggregate": [{"op": "argmax", "field": "share", "as": "peakRec"}], "groupby": ["species"]},
-        {"calculate": "datum.peakRec.month", "as": "peakMonth"},
-        {"calculate": "timeFormat(datetime(2000, datum.month - 1, 1), '%b')", "as": "monthName"}
+        {
+            "aggregate": [
+                {
+                    "op": "sum",
+                    "field": "count",
+                    "as": "count"
+                }
+            ],
+            "groupby": [
+                "species",
+                "month"
+            ]
+        },
+        {
+            "joinaggregate": [
+                {
+                    "op": "sum",
+                    "field": "count",
+                    "as": "total"
+                }
+            ],
+            "groupby": [
+                "species"
+            ]
+        },
+        {
+            "calculate": "datum.count / datum.total",
+            "as": "share"
+        },
+        {
+            "joinaggregate": [
+                {
+                    "op": "argmax",
+                    "field": "share",
+                    "as": "peakRec"
+                }
+            ],
+            "groupby": [
+                "species"
+            ]
+        },
+        {
+            "calculate": "datum.peakRec.month",
+            "as": "peakMonth"
+        },
+        {
+            "calculate": "timeFormat(datetime(2000, datum.month - 1, 1), '%b')",
+            "as": "monthName"
+        }
     ],
     "facet": {
         "row": {
             "field": "species",
             "type": "nominal",
             "title": null,
-            "sort": ["Rainbow Bee-eater", "Eastern Koel", "Swift Parrot", "Eastern Curlew",
-                    "Dollarbird", "Channel-billed Cuckoo", "Budgerigar"],
-            "header": {"labels": false}
+            "sort": [
+                "Rainbow Bee-eater",
+                "Eastern Koel",
+                "Swift Parrot",
+                "Eastern Curlew",
+                "Dollarbird",
+                "Channel-billed Cuckoo",
+                "Budgerigar",
+                "Grey Fantail"
+            ],
+            "header": {
+                "labels": false
+            }
         }
     },
     "spacing": 0,
-    "padding": {"left": 0, "right": 0, "top": 5, "bottom": 5},
+    "padding": {
+        "left": 0,
+        "right": 0,
+        "top": 5,
+        "bottom": 100
+    },
     "spec": {
-        "width": 420,
+        "width": 460,
         "height": 50,
         "encoding": {
             "x": {
                 "field": "month",
                 "type": "ordinal",
-                "sort": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                "sort": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12
+                ],
                 "axis": {
                     "title": null,
-                    "values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                    "values": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12
+                    ],
                     "labelExpr": "timeFormat(datetime(2000, datum.value - 1, 1), '%b')",
                     "grid": false
                 }
             },
-            "y": {"field": "share", "type": "quantitative", "scale": {"zero": true}, "axis": null}
+            "y": {
+                "field": "share",
+                "type": "quantitative",
+                "scale": {
+                    "zero": true
+                },
+                "axis": null
+            }
         },
         "layer": [
             {
                 "mark": {
                     "type": "area",
                     "interpolate": "monotone",
-                    "fillOpacity": 0.85                
+                    "color": "#697985"
                 },
                 "encoding": {
-                    "fill": {
-                        "field": "species",
-                        "type": "nominal",
-                        "scale": {
-                            "domain": [
-                                "Rainbow Bee-eater", "Eastern Koel", "Swift Parrot", "Eastern Curlew",
-                                "Dollarbird", "Channel-billed Cuckoo", "Budgerigar"
-                            ],
-                            "range": ["#168C8C", "#343434", "#65A83E", "#9A6046", "#2878B8", "#697985", "#00BFFF"]
-                        },
-                        "legend": null
-                    },
                     "tooltip": [
-                        {"field": "species", "type": "nominal", "title": "Bird"},
-                        {"field": "monthName", "type": "nominal", "title": "Month"},
+                        {
+                            "field": "species",
+                            "type": "nominal",
+                            "title": "Bird"
+                        },
+                        {
+                            "field": "monthName",
+                            "type": "nominal",
+                            "title": "Month"
+                        },
                         {
                             "field": "share",
                             "type": "quantitative",
-                            "title": "Share of the bird's yearly sightings",
+                            "title": "Share of yearly sightings",
                             "format": ".1%"
                         },
-                        {"field": "count", "type": "quantitative", "title": "Sightings", "format": ","}
+                        {
+                            "field": "count",
+                            "type": "quantitative",
+                            "title": "Sightings",
+                            "format": ","
+                        }
                     ]
                 }
             },
             {
-                "transform": [{"filter": "datum.month == datum.peakMonth"}],
+                "transform": [
+                    {
+                        "filter": "datum.month == datum.peakMonth"
+                    }
+                ],
                 "mark": {
                     "type": "text",
                     "dy": -8,
                     "fontSize": 11,
                     "fontWeight": "bold",
-                    "align": {"expr": "datum.month == 1 ? 'left' : datum.month == 12 ? 'right' : 'center'"}
+                    "align": {
+                        "expr": "datum.month == 1 ? 'left' : datum.month == 12 ? 'right' : 'center'"
+                    }
                 },
-                "encoding": {"text": {"field": "monthName", "type": "nominal"}}
+                "encoding": {
+                    "text": {
+                        "field": "monthName",
+                        "type": "nominal"
+                    }
+                }
             },
             {
-                "transform": [{"filter": "datum.month == 1"}],
-                "mark": {"type": "text", "align": "right", "dx": -8, "dy": -10, "fontSize": 12},
-                "encoding": {"y": {"value": 50}, "text": {"field": "species", "type": "nominal"}}
+                "transform": [
+                    {
+                        "filter": "datum.month == 1"
+                    }
+                ],
+                "mark": {
+                    "type": "text",
+                    "align": "right",
+                    "dx": -8,
+                    "dy": -10,
+                    "fontSize": 12
+                },
+                "encoding": {
+                    "y": {
+                        "value": 50
+                    },
+                    "text": {
+                        "field": "species",
+                        "type": "nominal"
+                    }
+                }
             }
         ]
     },
     "config": {
-        "view": {"stroke": null}, 
-        "axis": {"grid": false},
+        "view": {
+            "stroke": null
+        },
+        "axis": {
+            "grid": false
+        },
         "background": "#FFFFE0",
         "font": "Open Sans",
         "title": {
-            "font": "Open Sans",
+            "font": "Inter",
             "fontSize": 18,
-            "fontWeight": 700,
+            "fontWeight": 600,
             "anchor": "middle",
             "color": "black",
             "subtitleFont": "Open Sans",
@@ -119,8 +241,3 @@
         }
     }
 }
-
-            
-
-
-    

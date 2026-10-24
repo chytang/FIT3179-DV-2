@@ -1,0 +1,173 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Annual Bird Sightings, 2019-2025",
+    "anchor": "middle",
+    "offset": 12
+  },
+  "width": "container",
+  "height": 500,
+  "padding": {"left": 5, "right": 15, "top": 5, "bottom": 5},
+  "autosize": {"type": "fit", "contains": "padding"},
+  "data": {"url": "../data/species_year_month.csv"},
+  "params": [
+      {"name": "b1", "value": false, "bind": {"input": "checkbox", "name": "Rainbow Bee-eater"}},
+      {"name": "b2", "value": false, "bind": {"input": "checkbox", "name": "Eastern Koel"}},
+      {"name": "b3", "value": false, "bind": {"input": "checkbox", "name": "Swift Parrot"}},
+      {"name": "b4", "value": false, "bind": {"input": "checkbox", "name": "Eastern Curlew"}},
+      {"name": "b5", "value": false, "bind": {"input": "checkbox", "name": "Dollarbird"}},
+      {"name": "b6", "value": false, "bind": {"input": "checkbox", "name": "Channel-billed Cuckoo"}},
+      {"name": "b7", "value": false, "bind": {"input": "checkbox", "name": "Budgerigar"}},
+      {"name": "b8", "value": false, "bind": {"input": "checkbox", "name": "Grey Fantail"}}
+  ],
+  "transform": [
+    {"filter": "datum.year >= 2019 && datum.year <= 2025"},
+    {
+      "aggregate": [{"op": "sum", "field": "count", "as": "sightings"}],
+      "groupby": ["species", "year"]
+    },
+    {"calculate": "datum.year == 2019 ? datum.sightings : 0", "as": "base"},
+    {
+      "joinaggregate": [{"op": "sum", "field": "base", "as": "base2019"}],
+      "groupby": ["species"]
+    },
+    {"calculate": "(datum.sightings / datum.base2019 - 1) * 100", "as": "pctChange"},
+    {"calculate": "[b1, b2, b3, b4, b5, b6, b7, b8][indexof(['Rainbow Bee-eater', 'Eastern Koel', 'Swift Parrot', 'Eastern Curlew', 'Dollarbird', 'Channel-billed Cuckoo', 'Budgerigar', 'Grey Fantail'], datum.species)]", "as": "isSelected"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "sort": [2019, 2020, 2021, 2022, 2023, 2024, 2025],
+      "axis": {"title": null, "labelAngle": 0}
+    },
+    "y": {
+      "field": "sightings",
+      "type": "quantitative",
+      "scale": {"type": "log", "domain": [1000, 200000]},
+      "axis": {
+        "title": "Total sightings (log scale)",
+        "values": [1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000],
+        "labelExpr": "format(datum.value / 1000, 'd') + 'K'",
+        "grid": true,
+        "gridColor": "#e5e3c9",
+        "gridOpacity": 0.7
+      }
+    },
+    "detail": {"field": "species"},
+    "tooltip": [
+      {"field": "species", "type": "nominal", "title": "Bird"},
+      {"field": "year", "type": "ordinal", "title": "Year"},
+      {"field": "sightings", "type": "quantitative", "title": "Total sightings", "format": ","},
+      {"field": "pctChange", "type": "quantitative", "title": "Change since 2019 (%)", "format": "+.0f"}
+    ]
+  },
+  "layer": [
+    {
+      "transform": [{"filter": "!datum.isSelected"}],
+      "layer": [
+        {"mark": {"type": "line", "strokeWidth": 1.5, "color": "#b9b7a0"}},
+        {"mark": {"type": "circle", "size": 100, "color": "#b9b7a0"}}
+      ]
+    },
+    {
+      "transform": [{"filter": "datum.isSelected"}],
+      "encoding": {
+        "color": {
+          "field": "species",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Rainbow Bee-eater", "Eastern Koel", "Swift Parrot", "Eastern Curlew", "Dollarbird", "Channel-billed Cuckoo", "Budgerigar", "Grey Fantail"],
+            "scheme": "tableau10"
+          },
+          "legend": null
+        }
+      },
+      "layer": [
+        {"mark": {"type": "line", "strokeWidth": 3}},
+        {"mark": {"type": "circle", "size": 100}}
+      ]
+    },
+    {
+      "transform": [
+        {"filter": "datum.year == 2025"},
+        {"calculate": "log(datum.sightings) / LN10", "as": "logY"},
+        {
+          "window": [{"op": "row_number", "as": "rank"}],
+          "sort": [{"field": "sightings", "order": "descending"}]
+        },
+        {"calculate": "datum.logY + datum.rank * 0.05", "as": "shifted"},
+        {
+          "window": [{"op": "min", "field": "shifted", "as": "runMin"}],
+          "sort": [{"field": "sightings", "order": "descending"}],
+          "frame": [null, 0]
+        },
+        {"calculate": "pow(10, datum.runMin - datum.rank * 0.05)", "as": "labelY"},
+        {
+          "calculate": "datum.species + '  ' + (datum.pctChange >= 0 ? '+' : '') + format(datum.pctChange, '.0f') + '%'",
+          "as": "label"
+        }
+      ],
+      "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 11},
+      "encoding": {
+        "y": {
+          "field": "labelY",
+          "type": "quantitative",
+          "scale": {"type": "log", "domain": [1000, 200000]},
+          "axis": {"title": "Total sightings (log scale)"}
+        },
+        "text": {"field": "label"},
+        "tooltip": null,
+        "color": {
+          "condition": {
+            "test": "datum.isSelected",
+            "field": "species",
+            "type": "nominal",
+            "scale": {
+              "domain": ["Rainbow Bee-eater", "Eastern Koel", "Swift Parrot", "Eastern Curlew", "Dollarbird", "Channel-billed Cuckoo", "Budgerigar", "Grey Fantail"],
+              "scheme": "tableau10"
+            },
+            "legend": null
+          },
+          "value": "#6f6e60"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#FFFFE0",
+    "font": "Open Sans",
+    "view": {"stroke": null},
+    "title": {
+      "font": "Inter",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "black",
+      "subtitleFont": "Open Sans",
+      "subtitleFontSize": 12,
+      "subtitleColor": "#303632"
+    },
+    "axis": {
+      "grid": false,
+      "ticks": false,
+      "domain": false,
+      "labelFont": "Open Sans",
+      "labelFontSize": 11,
+      "labelColor": "#303632",
+      "labelPadding": 6,
+      "titleFont": "Open Sans",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "black"
+    },
+    "legend": {
+      "labelFont": "Open Sans",
+      "labelFontSize": 11,
+      "labelColor": "#303632",
+      "titleFont": "Open Sans",
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "titleColor": "black"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": {
-        "text": {"expr": "'Where is the ' + selectedBird + ' reported most?'"}
+        "text": {"expr": "selectedBird + ' Sightings Hotspots, 2019-2025'"}
         },
     "params": [
         {
@@ -10,14 +10,14 @@
             "bind": {
                 "input": "select",
                 "options": ["Rainbow Bee-eater", "Eastern Koel", "Swift Parrot", "Eastern Curlew",
-                            "Dollarbird", "Channel-billed Cuckoo", "Budgerigar", "Australian Magpie"],
+                            "Dollarbird", "Channel-billed Cuckoo", "Budgerigar", "Grey Fantail"],
                 "name": "Select a bird: "
             }
         }
     ],
     "width": "container",
-    "height": 460,
-    "padding": {"left": 0, "right": 10, "top": 5, "bottom": 5},
+    "height": 500,
+    "padding": {"left": 0, "right": 10, "top": 5, "bottom": 0},
     "autosize": {"type": "fit", "contains": "padding"},
     "projection": {
         "type": "conicEqualArea", 
@@ -33,7 +33,7 @@
         },
         "mark": {
             "type": "geoshape",
-            "fill": "floralwhite",
+            "fill": "#FFFDF0",
             "stroke": "darkgrey",
             "strokeWidth": 0.5
         }
@@ -64,10 +64,10 @@
                     "encoding": {
                         "latitude": {"field": "lat", "type": "quantitative"},
                         "longitude": {"field": "lon", "type": "quantitative"},
-                        "size": {"field": "count", "type": "quantitative", "scale": {"range": [6, 800]},
+                        "size": {"field": "count", "type": "quantitative", "scale": {"range": [6, 800], "zero": false},
                         "legend": {
                             "title": "Number of Sightings",
-                            "labelExpr": "format(datum.value, ',')",
+                            "labelExpr": "datum.value === 0 ? '' : format(datum.value, ',')",
                             "orient": "right",
                             "offset": -10
                             }
@@ -127,9 +127,9 @@
             "fill": "#FFFFE0"
         },
         "title": {
-            "font": "Open Sans",
+            "font": "Inter",
             "fontSize": 18,
-            "fontWeight": 700,
+            "fontWeight": 600,
             "anchor": "middle",
             "color": "black"
         },

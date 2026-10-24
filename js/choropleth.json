@@ -1,6 +1,7 @@
+
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Bird Sightings by State (2019-2025)",
+    "title": "Bird Sightings by State, 2019-2025",
     "params": [
         {
             "name": "chosen",
@@ -12,15 +13,16 @@
             }
         }
     ],
-    "width": 640,
-    "height": 460,
-    "padding": {"left": 0, "right": 10, "top": 5, "bottom": 5},
+    "width": "container",
+    "height": 500,
+    "padding": {"left": 0, "right": 10, "top": 5, "bottom": 0},
+    "autosize": {"type": "fit", "contains": "padding"},
     "projection": {
         "type": "conicEqualArea",
         "parallels": [-18, -36],
         "rotate": [-134, 0],
-        "center": [-1, -28], 
-        "scale": { "expr": "min(width / 0.6, height / 0.6) * 0.96" }, 
+        "center": [-1, -28],
+        "scale": { "expr": "min(width / 0.6, height / 0.6) * 0.96" },
         "translate": { "expr": "[width / 2, height / 2]" }
     },
     "data": {
@@ -48,12 +50,8 @@
             }
         },
         {
-            "calculate": "datum.sightings / datum.population", 
+            "calculate": "datum.sightings / datum.population",
             "as": "perPerson"
-        },
-        {
-            "calculate": "chosen === 'Total Sightings' ? datum.sightings : datum.perPerson",
-            "as": "selectedMetric"
         }
     ],
     "layer": [
@@ -71,14 +69,17 @@
                     "field": "sightings",
                     "type": "quantitative",
                     "scale": {
+                        "type": "linear",
                         "scheme": "oranges",
                         "domain": [0, 15000000]
                     },
                     "legend": {
                         "title": "Total Sightings",
-                        "titleFontSize": 10,
+                        "titleFontSize": 12,
                         "orient": "right",
-                        "offset": -12
+                        "offset": -10,
+                        "values": [0, 5000000, 10000000, 15000000],
+                        "format": "~s"
                     }
                 },
                 "tooltip": [
@@ -121,12 +122,11 @@
                         "type": "threshold",
                         "domain": [0, 1, 2, 3, 4, 5, 6, 7, 8],
                         "range": ["#f7fcf5", "#e5f5e0", "#c7e9c0", "#a1d99b",
-                                  "#74c476", "#41ab5d", "#005a32"
-                        ]
+                                  "#74c476", "#41ab5d", "#238b45", "#006d2c", "#00441b", "#002b16"]
                     },
                     "legend": {
                         "title": "Sightings Per Person",
-                        "titleFontSize": 10,
+                        "titleFontSize": 12,
                         "orient": "right",
                         "offset": -10
                     }
@@ -160,24 +160,24 @@
         }
     ],
     "config": {
-    "background": "#FFFFE0",
-    "font": "Open Sans",
-    "view": {
-        "stroke": null,
-        "fill": "#FFFFE0"
-    },
-    "title": {
+        "background": "#FFFFE0",
         "font": "Open Sans",
-        "fontSize": 18,
-        "fontWeight": 700,
-        "anchor": "middle",
-        "color": "black"
-    },
-    "legend": {
-        "titleFont": "Open Sans",
-        "labelFont": "Open Sans",
-        "titleFontSize": 12,
-        "labelFontSize": 11
+        "view": {
+            "stroke": null,
+            "fill": "#FFFFE0"
+        },
+        "title": {
+            "font": "Inter",
+            "fontSize": 18,
+            "fontWeight": 600,
+            "anchor": "middle",
+            "color": "black"
+        },
+        "legend": {
+            "titleFont": "Open Sans",
+            "labelFont": "Open Sans",
+            "titleFontSize": 12,
+            "labelFontSize": 11
+        }
     }
-}
 }

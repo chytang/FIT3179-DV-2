@@ -1,0 +1,82 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": {"expr": "selectedBird + ' Sightings by Elevation'"},
+    "anchor": "middle",
+    "offset": 12
+  },
+  "params": [
+    {
+      "name": "selectedBird",
+      "value": "Rainbow Bee-eater",
+      "bind": {
+        "input": "select",
+        "options": ["Rainbow Bee-eater", "Eastern Koel", "Swift Parrot", "Eastern Curlew", "Dollarbird", "Channel-billed Cuckoo", "Budgerigar", "Grey Fantail"],
+        "name": "Select a bird: "
+      }
+    }
+  ],
+  "width": "container",
+  "height": 500,
+  "padding": {"left": 5, "right": 5, "top": 5, "bottom": 5},
+  "autosize": {"type": "fit", "contains": "padding"},
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [-18, -36],
+    "rotate": [-134, 0],
+    "center": [-1, -28],
+    "scale": {"expr": "min(width / 0.6, height / 0.6) * 0.96"},
+    "translate": {"expr": "[width / 2, height / 2]"}
+  },
+  "layer": [
+    {
+      "data": {"url": "../data/elev_bands.geojson", "format": {"property": "features"}},
+      "mark": {"type": "geoshape", "stroke": null},
+      "encoding": {
+        "color": {
+          "field": "properties.band",
+          "type": "nominal",
+          "scale": {
+            "range": ["#cfe3b4", "#e9eda9", "#e8d28f", "#cf9f62", "#a46f45", "#744a33"]
+          },
+          "legend": {"title": "Elevation", "orient": "bottom", "columns": 3, "symbolType": "square"}
+        },
+        "tooltip": [{"field": "properties.band", "type": "nominal", "title": "Elevation"}]
+      }
+    },
+    {
+      "data": {"url": "../data/aus_states.topojson", "format": {"type": "topojson", "feature": "states"}},
+      "mark": {"type": "geoshape", "fill": null, "stroke": "#ffffff", "strokeWidth": 0.8, "opacity": 0.7}
+    },
+    {
+      "data": {"url": "../data/land.geojson", "format": {"property": "features"}},
+      "mark": {"type": "geoshape", "fill": null, "stroke": "#3f7f98", "strokeWidth": 1}
+    },
+    {
+      "data": {"url": "../data/contours.geojson", "format": {"property": "features"}},
+      "mark": {"type": "geoshape", "fill": null, "stroke": "#4a2c1d", "strokeWidth": 0.7, "opacity": 0.6}
+    },
+    {
+      "data": {"url": "../data/habitat_points.csv"},
+      "transform": [{"filter": "datum.species == selectedBird"}],
+      "mark": {"type": "circle", "size": 14, "fill": "hotpink", "opacity": 0.75, "stroke": "deeppink", "strokeWidth": 0.4},
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "tooltip": [
+          {"field": "species", "type": "nominal", "title": "Bird"},
+          {"field": "elev_m", "type": "quantitative", "title": "Elevation (m)", "format": ","},
+          {"field": "coast_km", "type": "quantitative", "title": "Distance from coast (km)", "format": ",.0f"}
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": "#FFFFE0",
+    "font": "Open Sans",
+    "view": {"stroke": null, "fill": "#dbe9ee"},
+    "title": {"font": "Inter", "fontSize": 18, "fontWeight": 600, "color": "black", "subtitleFont": "Open Sans", "subtitleFontSize": 12, "subtitleColor": "#303632"},
+    "axis": {"grid": false, "ticks": false, "domain": false, "labelFont": "Open Sans", "labelFontSize": 11, "labelColor": "#303632", "labelPadding": 6, "titleFont": "Open Sans", "titleFontSize": 12, "titleFontWeight": 600, "titleColor": "black"},
+    "legend": {"labelFont": "Open Sans", "labelFontSize": 11, "labelColor": "#303632", "titleFont": "Open Sans", "titleFontSize": 12, "titleFontWeight": 600, "titleColor": "black"}
+  }
+}

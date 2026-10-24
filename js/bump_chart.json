@@ -1,11 +1,36 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": {
-        "text": "Ten Most Reported Birds in Australia (2019-2025)",
-        "subtitle": "Placeholder description."
+        "text": "Ten Most Reported Birds in Australia, 2019-2025",
+        "anchor": "middle",
+        "offset": 50
     },
+    "params": [
+        {
+            "name": "selectedBird",
+            "value": "Australian Magpie",
+            "bind": {
+                "input": "select",
+                "options": [
+                    "Australian Magpie",
+                    "Rainbow Lorikeet",
+                    "Magpie-lark",
+                    "Noisy Miner",
+                    "Welcome Swallow",
+                    "Willie Wagtail",
+                    "Pacific Black Duck",
+                    "Superb Fairy-wren",
+                    "Sulphur-crested Cockatoo",
+                    "Australian White Ibis",
+                    "Galah",
+                    "Red Wattlebird"
+                ],
+                "name": "Select a bird: "
+            }
+        }
+    ],
     "width": "container",
-    "height": 400,
+    "height": 500,
     "autosize": {"type": "fit", "contains": "padding"},
     "padding": {"left": 5, "right": 25, "top": 5, "bottom": 5},
     "data": {"url": "../data/top_species_by_year.csv"},
@@ -43,13 +68,26 @@
     "layer": [
         {
             "mark": {"type": "line", "strokeWidth": 3, "interpolate": "monotone"},
-            "encoding": {"opacity": {"condition": {"param": "pick", "value": 1}, "value": 0.2}}
+            "encoding": {
+                "opacity": {
+                    "condition": {
+                        "test": "datum.species === selectedBird",
+                        "value": 1
+                    },
+                    "value": 0.2
+                }
+            }
         },
         {
-            "params": [{"name": "pick", "select": {"type": "point", "fields": ["species"], "on": "click", "clear": "dblclick"}}],
             "mark": {"type": "circle", "size": 150, "stroke": "white", "strokeWidth": 1.5},
             "encoding": {
-                "opacity": {"condition": {"param": "pick", "value": 1}, "value": 0.2},
+                "opacity": {
+                    "condition": {
+                        "test": "datum.species === selectedBird",
+                        "value": 1
+                    },
+                    "value": 0.2
+                },
                 "tooltip": [
                     {"field": "species", "type": "nominal", "title": "Bird"},
                     {"field": "year", "type": "ordinal", "title": "Year"},
@@ -70,7 +108,13 @@
             "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 11},
             "encoding": {
                 "text": {"field": "species", "type": "nominal"},
-                "opacity": {"condition": {"param": "pick", "value": 1}, "value": 0.2}
+                "opacity": {
+                    "condition": {
+                        "test": "datum.species === selectedBird",
+                        "value": 1
+                    },
+                    "value": 0.2
+                }
             }
         }
     ],
@@ -80,12 +124,10 @@
         "view": {"stroke": null},
         "axis": {"grid": false},
         "title": {
-            "font": "Open Sans",
+            "font": "Inter",
             "fontSize": 18,
-            "fontWeight": 700,
-            "color": "black",
-            "subtitleFont": "Open Sans",
-            "subtitleColor": "#303632"
+            "fontWeight": 600,
+            "color": "black"
         }
 }
 }

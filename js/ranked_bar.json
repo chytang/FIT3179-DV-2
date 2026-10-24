@@ -1,0 +1,65 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": {"expr": "'Recorded Sightings by Bird, ' + selectedYear"},
+    "anchor": "middle",
+    "offset": 12
+  },
+  "params": [
+    {
+      "name": "selectedYear",
+      "value": 2025,
+      "bind": {"input": "select", "options": [2019, 2020, 2021, 2022, 2023, 2024, 2025], "name": "Select a year: "}
+    },
+    {"name": "selectedBird", "value": "Australian Magpie"}
+  ],
+  "width": 460,
+  "height": 500,
+  "padding": {"left": 0, "right": 20, "top": 5, "bottom": 5},
+  "autosize": {"type": "fit", "contains": "padding"},
+  "data": {"url": "../data/top_species_by_year.csv"},
+  "transform": [{"filter": "datum.year == selectedYear"}],
+  "encoding": {
+    "y": {"field": "species", "type": "nominal", "sort": "-x", "axis": {"title": null}},
+    "x": {
+      "field": "count",
+      "type": "quantitative",
+      "axis": {
+        "title": "Recorded sightings",
+        "labelExpr": "datum.value == 0 ? '0' : datum.value >= 1000000 ? format(datum.value / 1000000, ',.1f') + 'M' : format(datum.value / 1000, ',.0f') + 'K'",
+        "grid": true,
+        "gridColor": "#e5e3c9",
+        "gridOpacity": 0.7
+      }
+    },
+    "tooltip": [
+      {"field": "species", "type": "nominal", "title": "Bird"},
+      {"field": "year", "type": "ordinal", "title": "Year"},
+      {"field": "rank", "type": "quantitative", "title": "Rank"},
+      {"field": "count", "type": "quantitative", "title": "Recorded sightings", "format": ","}
+    ]
+  },
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadiusEnd": 3, "height": {"band": 0.7}},
+      "encoding": {
+        "color": {
+          "condition": {"test": "datum.species === selectedBird", "value": "#6FAE8A"},
+          "value": "#253D32"
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 6, "fontSize": 11, "color": "#303632", "clip": false},
+      "encoding": {"text": {"field": "count", "type": "quantitative", "format": ","}}
+    }
+  ],
+  "config": {
+    "background": "#FFFFE0",
+    "font": "Open Sans",
+    "view": {"stroke": null},
+    "title": {"font": "Inter", "fontSize": 18, "fontWeight": 600, "color": "black"},
+    "axis": {"grid": false, "ticks": false, "domain": false, "labelFont": "Open Sans", "labelFontSize": 11, "labelColor": "#303632", "labelPadding": 6, "titleFont": "Open Sans", "titleFontSize": 12, "titleFontWeight": 600, "titleColor": "black"}
+  }
+}
