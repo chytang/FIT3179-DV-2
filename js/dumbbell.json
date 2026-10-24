@@ -1,0 +1,52 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {"text": "Change in Sightings by Bird, 2019-2025", "anchor": "middle"},
+  "params": [{"name": "selectedBird", "value": "Australian Magpie"}, {"name": "highlightOn", "value": false}],
+  "data": {"url": "../data/top_species_by_year.csv"},
+  "transform": [{"filter": "datum.year == 2019 || datum.year == 2025"}, {"calculate": "datum.year == 2019 ? datum.count : 0", "as": "startCount"}, {"calculate": "datum.year == 2025 ? datum.count : 0", "as": "endCount"}, {"aggregate": [{"op": "sum", "field": "startCount", "as": "startCount"}, {"op": "sum", "field": "endCount", "as": "endCount"}], "groupby": ["species"]}, {"filter": "datum.startCount > 0 && datum.endCount > 0"}, {"calculate": "(datum.endCount - datum.startCount) / datum.startCount", "as": "pctChange"}, {"calculate": "(datum.pctChange >= 0 ? '+' : '') + format(datum.pctChange * 100, '.1f') + '%'", "as": "label"}, {"fold": ["startCount", "endCount"], "as": ["period", "count"]}, {"calculate": "datum.period == 'startCount' ? 2019 : 2025", "as": "year"}],
+  "width": 500,
+  "height": 500,
+  "padding": {"left": 0, "right": 10, "top": 5, "bottom": 5},
+  "autosize": {"type": "fit", "contains": "padding"},
+  "encoding": {
+    "y": {"field": "species", "type": "nominal", "sort": {"field": "pctChange", "op": "max", "order": "descending"}, "axis": {"title": null, "labelLimit": 150}},
+    "x": {"field": "count", "type": "quantitative", "scale": {"zero": true}, "axis": {"title": "Recorded sightings", "labelExpr": "datum.value == 0 ? '0' : datum.value >= 1000000 ? format(datum.value / 1000000, ',.1f') + 'M' : format(datum.value / 1000, ',.0f') + 'K'"}},
+    "tooltip": [{"field": "species", "type": "nominal", "title": "Bird"}, {"field": "startCount", "type": "quantitative", "title": "2019 sightings", "format": ","}, {"field": "endCount", "type": "quantitative", "title": "2025 sightings", "format": ","}, {"field": "label", "type": "nominal", "title": "Change"}]
+  },
+  "layer": [
+    {
+      "transform": [{"aggregate": [{"op": "min", "field": "count", "as": "minCount"}, {"op": "max", "field": "count", "as": "maxCount"}, {"op": "max", "field": "pctChange", "as": "pctChange"}, {"op": "max", "field": "label", "as": "label"}], "groupby": ["species"]}],
+      "mark": {"type": "rule", "strokeWidth": 2, "strokeCap": "round"},
+      "encoding": {
+        "x": {"field": "minCount", "type": "quantitative"},
+        "x2": {"field": "maxCount"},
+        "color": {"value": "#888888"},
+        "tooltip": [{"field": "species", "title": "Bird"}, {"field": "minCount", "title": "2019 sightings", "format": ","}, {"field": "maxCount", "title": "2025 sightings", "format": ","}, {"field": "label", "title": "Change"}],
+        "strokeWidth": {"condition": {"test": "!highlightOn || datum.species === selectedBird", "value": 4}, "value": 2}
+      }
+    },
+    {
+      "transform": [{"aggregate": [{"op": "min", "field": "count", "as": "startCount"}, {"op": "max", "field": "count", "as": "endCount"}, {"op": "max", "field": "pctChange", "as": "pctChange"}, {"op": "max", "field": "label", "as": "label"}], "groupby": ["species"]}, {"calculate": "(datum.startCount + datum.endCount) / 2", "as": "midCount"}],
+      "mark": {"type": "text", "dy": -12, "font": "Open Sans", "fontSize": 11, "color": "#303632"},
+      "encoding": {
+        "x": {"field": "midCount", "type": "quantitative"},
+        "text": {"field": "label", "type": "nominal"}
+      }
+    },
+    {
+      "mark": {"type": "circle", "size": 140, "stroke": "#FFFFE0", "strokeWidth": 1},
+      "encoding": {
+        "color": {"field": "year", "type": "ordinal", "scale": {"domain": [2019, 2025], "range": ["#2B9FD9", "#D97736"]}, "legend": {"orient": "right", "title": null}},
+        "tooltip": [{"field": "species", "title": "Bird"}, {"field": "year", "title": "Year"}, {"field": "count", "title": "Sightings", "format": ","}, {"field": "label", "title": "Change"}],
+        "size": {"value": 140}
+      }
+    }
+  ],
+  "config": {
+    "background": "#FFFFE0",
+    "font": "Open Sans",
+    "view": {"stroke": null},
+    "title": {"font": "Inter", "fontSize": 18, "fontWeight": 600, "color": "black"},
+    "axis": {"labelColor": "#303632", "titleColor": "#303632", "gridColor": "#D9D9C0", "domainColor": "#A5A58D", "tickColor": "#A5A58D"}
+  }
+}

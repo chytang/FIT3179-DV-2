@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap&family=Lora:wght@600"
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Lora:wght@600&display=swap"
     rel="stylesheet">
 
   <link rel="stylesheet" href="css/styles.css">
@@ -192,7 +192,8 @@
             <h3>How to read the maps</h3>
             <p>
               The left map shows elevation above sea level, while the right
-              shows proximity to the coast. Pink dots indicate recorded
+              shows proximity to the coast. 
+              <span class="measure-pink">Pink</span> dots indicate recorded
               sightings of the selected bird.
             </p>
           </div>
@@ -470,10 +471,11 @@
           <div class="description">
             <h3>How big are the gaps?</h3>
             <p>
-              Each bar is one bird's recorded sightings in the chosen year,
-              sorted from most to fewest. Change the year to see how the order
-              and the gaps shift. The bird selected in the rankings dropdown
-              above is also highlighted here.
+              Each line is one bird's recorded sightings in the chosen year, sorted from most to fewest, with the count
+              labelled beside its dot.
+              Change the year to see how the order and the gaps shift.
+              The bird selected in the rankings dropdown above is also highlighted here.
+              Hover over a dot to see the exact count and rank.
             </p>
           </div>
         </div>
@@ -481,23 +483,22 @@
           <div class="description">
             <h3>Who grew the most?</h3>
             <p>
-              Each dot shows the percentage change in a bird's recorded sightings from 2019 to 2025.
-              Dots further to the right indicate larger increases.
-              Only birds ranked in the top ten in both years are shown.
-              Hover over a dot to see actual counts, as percentage can exaggerate changes for birds with fewer initial
-              sightings.
+              Each line connects a bird's recorded sightings in 2019 (<span class="measure-blue">blue</span> dot) 
+              to 2025 (<span class="measure-dumbbell-orange">orange</span> dot), with the percentage change above it.
+              Birds are sorted from the largest to smallest increase, and only those ranked in the top ten in both years are shown.
+              Hover over a dot to view actual counts, as percentages can exaggerate changes for birds with fewer initial sightings.
             </p>
           </div>
         </div>
       </div>
 
-      <!-- Ranked bar and change charts -->
+      <!-- Lollipop and dumbbell charts -->
       <div class="pure-g row">
         <div class="pure-u-1 pure-u-md-1-2">
-          <div id="ranked_bar" class="vis-container"></div>
+          <div id="lollipop" class="vis-container"></div>
         </div>
         <div class="pure-u-1 pure-u-md-1-2">
-          <div id="lollipop" class="vis-container"></div>
+          <div id="dumbbell" class="vis-container"></div>
         </div>
       </div>
     </section>
@@ -568,7 +569,7 @@
 
     const standardCharts = [
       "choropleth", "hotspot", "ridgeline", "heatmap", "bump_chart", "line_chart",
-      "elevation_map", "coast_map", "elevation_bands", "coast_range", "ranked_bar", "lollipop"
+      "elevation_map", "coast_map", "elevation_bands", "coast_range", "lollipop", "dumbbell"
     ];
 
     const MIGRATION_MAP_HEIGHT = 460;
@@ -818,7 +819,7 @@
         always: [
           {
             left: "36%", top: "50px", w: "420px",
-            html: `<span class="k-green">Grey Fantail</span> peaks in April overall (<strong>71,773 sightings</strong>), narrowly ahead of October (<strong>70,709</strong>). October leads from 2019 to 2024, but unusually low counts in late 2025 shifts the overall peak to April.`
+            html: `<span class="k-green">Grey Fantail</span> peaks in April overall (<strong>71,773 sightings</strong>), narrowly ahead of October (<strong>70,709</strong>). October leads from 2019 to 2024, but unusually low counts in late 2025 shift the overall peak to April.`
           }
         ]
       },
@@ -887,27 +888,23 @@
       bump_chart: {
         always: [
           {
-            left: "4%", top: "40px", w: "220x",
+            left: "4%", top: "40px", w: "390px",
             tail: { len: 14, x: 60 },
             html: `<span class="k-green">Australian Magpie</span> ranks <strong>first every year</strong> from 2019 to 2025.`
           }
         ]
       },
 
-      ranked_bar: {
+      lollipop: {
         always: [
           {
             left: "46%", top: "150px", w: "150px", hidden: true, html: "",
-            tail: { x: "0%", y: "50%", angle: 180, len: 40 }
-          },
-          {
-            left: "46%", top: "235px", w: "150px", hidden: true, html: "",
             tail: { x: "0%", y: "50%", angle: 180, len: 40 }
           }
         ]
       },
 
-      lollipop: {
+      dumbbell: {
         always: [
           {
             left: "46%", top: "150px", w: "150px", hidden: true, html: "",
@@ -1328,39 +1325,71 @@
           }
         }
       },
-      "ranked_bar": {
+      "lollipop": {
         "always:0": {
           "left": "75%",
           "top": "55.2656px",
           "tailTarget": {
-            "x": "63.36",
-            "y": "11.58"
+            "x": "63.43",
+            "y": "9.95"
           }
         },
-        "always:1": {
-          "left": "46%",
-          "top": "235px",
+        "always:0@2025": {
+          "left": "75%",
+          "top": "55.2656px",
           "tailTarget": {
-            "x": "39.33",
-            "y": "50.09"
+            "x": "66.45",
+            "y": "10.26"
+          }
+        },
+        "always:0@2020": {
+          "left": "75%",
+          "top": "55.2656px",
+          "tailTarget": {
+            "x": "66.44",
+            "y": "10.41"
+          }
+        },
+        "always:0@2021": {
+          "left": "75%",
+          "top": "55.2656px",
+          "tailTarget": {
+            "x": "64.10",
+            "y": "9.95"
+          }
+        },
+        "always:0@2023": {
+          "left": "75%",
+          "top": "55.2656px",
+          "tailTarget": {
+            "x": "64.78",
+            "y": "10.08"
+          }
+        },
+        "always:0@2024": {
+          "left": "75%",
+          "top": "55.2656px",
+          "tailTarget": {
+            "x": "65.04",
+            "y": "10.52"
           }
         }
       },
-      "lollipop": {
+      "dumbbell": {
         "always:0": {
           "left": "75%",
           "top": "71.1615px",
           "tailTarget": {
-            "x": "68.04",
-            "y": "11.60"
+            "x": "46.99",
+            "y": "9.89"
           }
         },
         "always:1": {
           "left": "75%",
           "top": "197.68px",
           "tailTarget": {
-            "x": "56.50",
-            "y": "29.58"
+            "x": "62.33",
+            "y": "28.47"
           }
         }
       }
@@ -1385,7 +1414,7 @@
     const formatCount = n => Math.round(n).toLocaleString("en-AU");
 
     const formatPct = value =>
-      `${value >= 0 ? "+" : ""}${(Math.trunc(value * 10) / 10).toFixed(1)}%`;
+      `${value >= 0 ? "+" : ""}${(Math.round(value * 10) / 10).toFixed(1)}%`;
 
     // ---------- Callouts ----------
 
@@ -1675,7 +1704,7 @@
       view.addSignalListener(signalName, (name, value) => update(value));
     }
 
-    // ---------- Data-driven callouts (ranked bars and change chart) ----------
+    // ---------- Lollipop and Dumbbell Callouts ----------
 
     async function loadTopSpecies() {
       const response = await fetch("data/top_species_by_year.csv");
@@ -1684,8 +1713,8 @@
       topSpecies = vega.read(await response.text(), { type: "csv", parse: "auto" });
     }
 
-    function updateRankedBarCallouts() {
-      const view = chartViews["ranked_bar"];
+    function updateLollipopCallouts() {
+      const view = chartViews["lollipop"];
       if (!view || !topSpecies.length) return;
 
       const year = Number(view.signal("selectedYear"));
@@ -1701,14 +1730,14 @@
       const times = (first.count / last.count).toFixed(1);
 
       setCallout(
-        "ranked_bar",
+        "lollipop",
         "always:0",
         `<span class="k-green">${first.species}</span> leads in ${year} with <strong>${formatCount(first.count)}</strong> sightings, <strong>${times}×</strong> as many as ${last.species} (ranked 10th).`
       );
     }
 
     function updateChangeCallouts() {
-      const view = chartViews["lollipop"];
+      const view = chartViews["dumbbell"];
       if (!view || !topSpecies.length) return;
 
       const start = 2019;
@@ -1737,20 +1766,20 @@
       const biggestGain = [...rows].sort((x, y) => (y.b - y.a) - (x.b - x.a))[0];
 
       setCallout(
-        "lollipop",
+        "dumbbell",
         "always:0",
         `<span class="k-green">${top.name}</span> had the ${top.pct >= 0 ? "largest percentage increase" : "smallest percentage decline"}, at <strong>${formatPct(top.pct)}</strong> from ${start} to ${end}.`
       );
 
       if (biggestGain.name !== top.name && biggestGain.b > biggestGain.a) {
         setCallout(
-          "lollipop",
+          "dumbbell",
           "always:1",
           `<span class="k-green">${biggestGain.name}</span> recorded the largest increase in raw sightings, adding <strong>${formatCount(biggestGain.b - biggestGain.a)}</strong> (<strong>${formatPct(biggestGain.pct)}</strong>).`
         );
       } else {
         setCallout(
-          "lollipop",
+          "dumbbell",
           "always:1",
           `<span class="k-green">${bottom.name}</span> had the ${bottom.pct < 0 ? "largest percentage decline" : "smallest percentage increase"}, at <strong>${formatPct(bottom.pct)}</strong> from ${start} to ${end}.`
         );
@@ -1758,10 +1787,56 @@
     }
 
     function bindDataCallouts() {
-      chartViews["ranked_bar"]?.addSignalListener("selectedYear", updateRankedBarCallouts);
+      chartViews["lollipop"]?.addSignalListener("selectedYear", () => {
+        updateLollipopCallouts();
+        applyYearPositions("lollipop");
+      });
 
-      updateRankedBarCallouts();
+      updateLollipopCallouts();
       updateChangeCallouts();
+      applyYearPositions("lollipop");
+    }
+
+    // Highlight the selected bird in the dumbbell chart 
+    function linkDumbbellHighlight() {
+      const view = chartViews["dumbbell"];
+      const source = chartViews["bump_chart"];
+      if (!view || !source || !topSpecies.length) return;
+
+      const has = (name, year) =>
+        topSpecies.some(d => d.species === name && Number(d.year) === year);
+
+      const apply = bird =>
+        view.signal("highlightOn", has(bird, 2019) && has(bird, 2025)).run();
+
+      apply(source.signal("selectedBird"));
+      source.addSignalListener("selectedBird", (name, bird) => apply(bird));
+    }
+
+    // ---------- Per-year callout positions ----------
+
+    const YEAR_CHARTS = { lollipop: "selectedYear" };
+
+    const yearOf = chartId =>
+      YEAR_CHARTS[chartId] ? chartViews[chartId]?.signal(YEAR_CHARTS[chartId]) : undefined;
+
+    function applyYearPositions(chartId) {
+      const year = yearOf(chartId);
+      if (year == null) return;
+
+      document.querySelectorAll(`.callout[data-chart="${chartId}"]`).forEach(el => {
+        const key = el.dataset.calloutKey;
+        const base = { ...CALLOUTS[chartId]?.always?.[Number(key.split(":")[1])], ...CALLOUT_POSITIONS[chartId]?.[key] };
+        const p = CALLOUT_POSITIONS[chartId]?.[`${key}@${year}`] || base;
+
+        el.style.left = p.left;
+        el.style.top = p.top;
+
+        if (p.tailTarget) { el.dataset.targetX = p.tailTarget.x; el.dataset.targetY = p.tailTarget.y; }
+        else { delete el.dataset.targetX; delete el.dataset.targetY; }
+      });
+
+      redrawCalloutLines(document.getElementById(chartId).parentElement);
     }
 
     // ---------- Start-up ----------
@@ -1779,11 +1854,12 @@
       ]);
 
       redrawAllCalloutLines();
-      linkBirdSelection("bump_chart", ["ranked_bar", "lollipop"]);
+      linkBirdSelection("bump_chart", ["lollipop", "dumbbell"]);
 
       try {
         await loadTopSpecies();
         bindDataCallouts();
+        linkDumbbellHighlight();
       } catch (error) {
         console.warn("Data-driven callouts unavailable:", error);
       }

@@ -191,6 +191,11 @@ p {
     font-weight: 700;
 }
 
+.measure-pink {
+    color: #FF69B4;
+    font-weight: 700;
+}
+
 #choropleth-description,
 #hotspot-description {
     white-space: pre-line;
@@ -275,6 +280,18 @@ p {
     color: var(--muted);
     font-size: 11px;
 }
+
+/* DUMBBELL */
+.measure-blue {
+    color: #2B9FD9;
+    font-weight: 700;
+}
+
+.measure-dumbbell-orange {
+    color: #D97736;
+    font-weight: 700;
+}
+
 
 /* CALLOUTS */
 

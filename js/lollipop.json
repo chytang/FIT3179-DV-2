@@ -1,12 +1,16 @@
-
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Change in Sightings by Bird, 2019-2025",
+    "text": {"expr": "'Recorded Sightings by Bird, ' + selectedYear"},
     "anchor": "middle",
     "offset": 12
   },
   "params": [
+    {
+      "name": "selectedYear",
+      "value": 2025,
+      "bind": {"input": "select", "options": [2019, 2020, 2021, 2022, 2023, 2024, 2025], "name": "Select a year: "}
+    },
     {"name": "selectedBird", "value": "Australian Magpie"}
   ],
   "width": 460,
@@ -14,71 +18,54 @@
   "padding": {"left": 0, "right": 20, "top": 5, "bottom": 5},
   "autosize": {"type": "fit", "contains": "padding"},
   "data": {"url": "../data/top_species_by_year.csv"},
-  "transform": [
-    {"filter": "datum.year == 2019 || datum.year == 2025"},
-    {"calculate": "datum.year == 2019 ? datum.count : 0", "as": "startCount"},
-    {"calculate": "datum.year == 2025 ? datum.count : 0", "as": "endCount"},
-    {
-      "aggregate": [
-        {"op": "sum", "field": "startCount", "as": "startCount"},
-        {"op": "sum", "field": "endCount", "as": "endCount"}
-      ],
-      "groupby": ["species"]
-    },
-    {"filter": "datum.startCount > 0 && datum.endCount > 0"},
-    {"calculate": "(datum.endCount / datum.startCount - 1) * 100", "as": "pctChange"},
-    {"calculate": "(datum.pctChange >= 0 ? '+' : '') + format(datum.pctChange, '.1f') + '%'", "as": "label"}
-  ],
+  "transform": [{"filter": "datum.year == selectedYear"}],
   "encoding": {
-    "y": {
-      "field": "species",
-      "type": "nominal",
-      "sort": {"field": "pctChange", "op": "max", "order": "descending"},
-      "axis": {"title": null}
-    },
+    "y": {"field": "rank", "type": "quantitative", "scale": {"domain": [10.5, 0.5]}, "axis": null},
     "x": {
-      "field": "pctChange",
+      "field": "count",
       "type": "quantitative",
-      "scale": {"zero": true, "nice": true},
       "axis": {
-        "title": "Change in recorded sightings",
-        "labelExpr": "(datum.value > 0 ? '+' : '') + datum.value + '%'",
+        "title": "Recorded sightings",
+        "labelExpr": "datum.value == 0 ? '0' : datum.value >= 1000000 ? format(datum.value / 1000000, ',.1f') + 'M' : format(datum.value / 1000, ',.0f') + 'K'",
         "grid": true,
-        "gridColor": {"condition": {"test": "datum.value === 0", "value": "#303632"}, "value": "#e5e3c9"},
-        "gridWidth": {"condition": {"test": "datum.value === 0", "value": 1.5}, "value": 1}
+        "gridColor": "#e5e3c9",
+        "gridOpacity": 0.7
       }
     },
     "tooltip": [
       {"field": "species", "type": "nominal", "title": "Bird"},
-      {"field": "startCount", "type": "quantitative", "title": "Sightings in 2019", "format": ","},
-      {"field": "endCount", "type": "quantitative", "title": "Sightings in 2025", "format": ","},
-      {"field": "label", "type": "nominal", "title": "Percentage change"}
+      {"field": "year", "type": "ordinal", "title": "Year"},
+      {"field": "rank", "type": "quantitative", "title": "Rank"},
+      {"field": "count", "type": "quantitative", "title": "Recorded sightings", "format": ","}
     ]
   },
   "layer": [
     {
-      "mark": {"type": "rule", "strokeWidth": 2.5},
+      "mark": {"type": "rule", "strokeWidth": 2, "strokeCap": "round"},
       "encoding": {
         "x2": {"datum": 0},
-        "color": {"condition": {"test": "datum.species === selectedBird", "value": "#6FAE8A"}, "value": "#253D32"}
+        "color": {
+          "condition": {"test": "datum.species === selectedBird", "value": "#6FAE8A"},
+          "value": "#253D32"
+        }
       }
     },
     {
-      "mark": {"type": "circle", "opacity": 1},
+      "mark": {"type": "point", "shape": "circle", "filled": true, "size": 140, "stroke": "#FFFFE0", "strokeWidth": 1},
       "encoding": {
-        "size": {"condition": {"test": "datum.species === selectedBird", "value": 260}, "value": 170},
-        "color": {"condition": {"test": "datum.species === selectedBird", "value": "#6FAE8A"}, "value": "#253D32"}
+        "color": {
+          "condition": {"test": "datum.species === selectedBird", "value": "#6FAE8A"},
+          "value": "#253D32"
+        }
       }
     },
     {
-      "transform": [{"filter": "datum.pctChange >= 0"}],
-      "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 11, "color": "#303632", "clip": false},
-      "encoding": {"text": {"field": "label", "type": "nominal"}}
+      "mark": {"type": "text", "align": "left", "dx": 7, "fontSize": 11, "color": "#303632", "clip": false},
+      "encoding": {"text": {"field": "count", "type": "quantitative", "format": ","}}
     },
     {
-      "transform": [{"filter": "datum.pctChange < 0"}],
-      "mark": {"type": "text", "align": "right", "dx": -8, "fontSize": 11, "color": "#303632", "clip": false},
-      "encoding": {"text": {"field": "label", "type": "nominal"}}
+      "mark": {"type": "text", "align": "right", "dx": -8, "fontSize": 11, "font": "Open Sans", "color": "#303632", "clip": false},
+      "encoding": {"x": {"datum": 0}, "text": {"field": "species", "type": "nominal"}}
     }
   ],
   "config": {
