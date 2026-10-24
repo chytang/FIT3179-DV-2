@@ -57,8 +57,8 @@
       "encoding": {"x": {"field": "med"}}
     },
     {
-      "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 11, "color": "#303632"},
-      "encoding": {"x": {"field": "q3"}, "text": {"field": "label"}}
+      "mark": {"type": "text", "align": "center", "baseline": "top", "dy": 10, "fontSize": 11, "color": "#303632"},
+      "encoding": {"x": {"field": "med"}, "text": {"field": "label"}}
     }
   ],
   "config": {
