@@ -1658,7 +1658,6 @@
       setSharedMonth(Number(monthSlider.value));
     });
 
-    // One dropdown drives the same signal in other charts.
     function linkBirdSelection(sourceId, targetIds) {
       const source = chartViews[sourceId];
       if (!source) return;
@@ -1704,7 +1703,7 @@
       view.addSignalListener(signalName, (name, value) => update(value));
     }
 
-    // ---------- Lollipop and Dumbbell Callouts ----------
+    // ---------- Lollipop and dumbbell callouts ----------
 
     async function loadTopSpecies() {
       const response = await fetch("data/top_species_by_year.csv");
